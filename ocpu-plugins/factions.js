@@ -422,6 +422,7 @@ exports.commands = {
 					output += "<tr>";
 					output += "<td>" + Chat.escapeHTML(curFaction.name) + "</td>";
 					output += "<td>" + desc + "</td>";
+					output += "<td>" + curFaction.tourwins + "</td>";
 					output += "<td>" + '<button name="send" value="/faction profile ' + curFaction.id + '">' + curFaction.users.length + "</button></td>";
 					output += "</tr>";
 				} else if (!curFaction.private) {
@@ -440,7 +441,7 @@ exports.commands = {
 			if (!this.runBroadcast()) return;
 			if (!target && getFaction(user.userid)) target = getFaction(user.userid);
 			let factionId = toId(target);
-			if (!factions[factionId] || factions[factionId] && factions[factionId].private === true && !this.can('roomowner') || factions[factionId] && factions[factionId].private === true && getFaction(user.userid) !== factions[factionId]) return this.errorReply("There is no faction by that name! If you are not in a faction please specify one!");
+			if (!factions[factionId] || factions[factionId].private === true && !this.can('roomowner') || factions[factionId].private === true && getFaction(user.userid) !== factions[factionId].name) return this.errorReply("There is no faction by that name! If you are not in a faction please specify one!");
 			let output = (factions[factionId].avatar ? "<img src='" + factions[factionId].avatar + "' height='80' width='80' align='left'>" : '') + '&nbsp;' + Chat.escapeHTML(factions[factionId].name) + '</br>';
 			output += '<br />&nbsp;Faction Vs Faction wins: ' + factions[factionId].tourwins + '<br /> &nbsp;Usercount: ' + factions[factionId].users.length + '<br />';
 			output += '&nbsp;Description: ' + factions[factionId].desc + '<br />';
