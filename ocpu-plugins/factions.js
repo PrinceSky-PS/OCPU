@@ -420,10 +420,10 @@ exports.commands = {
 				if (desc.length > 50) desc = desc.substr(0, 50) + "<br />" + desc.substr(50);
 				if (this.can('roomowner')) {
 					output += "<tr>";
-					output +="<td>" + Chat.escapeHTML(curFaction.name) + "</td>";
+					output += "<td>" + Chat.escapeHTML(curFaction.name) + "</td>";
 					output += "<td>" + desc + "</td>";
 					output += "<td>" + '<button name="send" value="/faction profile ' + curFaction.id + '">' + curFaction.users.length + "</button></td>";
-					output += "</tr>"
+					output += "</tr>";
 				} else if (!curFaction.private) {
 					output += "<tr>";
 					output += "<td>" + Chat.escapeHTML(curFaction.name) + "</td>";
