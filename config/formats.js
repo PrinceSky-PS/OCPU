@@ -5,6 +5,21 @@
 
 exports.Formats = [
 
+	// Customs
+	///////////////////////////////////////////////////////////////////
+	{
+		section: "Custom formats",
+	},
+	{
+		name: "[Gen 7] Insanity",
+		desc: [
+			`Custom teams made by people with all legendaries/mythicals typing and base stats changed.`,
+		],
+		
+		mod: 'insanity',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Cancel Mod'],
+	},
+
 	// US/UM Singles
 	///////////////////////////////////////////////////////////////////
 	{
