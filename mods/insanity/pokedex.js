@@ -273,4 +273,48 @@ exports.BattlePokedex = {
 		types: ['Fighting', 'Ice'],
 		baseStats: {hp: 250, atk: 75, def: 142, spa: 86, spd: 53, spe: 37}, //Best: ...
 	},
+	typenull: {
+		inherit: true,
+		types: ['Ground', 'Fire'],
+	},
+	silvaly: {
+		inherit: true,
+		types: ['Flying'],
+	},
+	tapukoko: {
+		inherit: true,
+		types: ['Water', 'Dark'],
+	},
+	tapulele: {
+		inherit: true,
+		types: ['Fairy', 'Electric'],
+	},
+	tapubulu: {
+		inherit: true,
+		types: ['Ghost', 'Poison'],
+	},
+	tapufini: {
+		inherit: true,
+		types: ['Grass', 'Fairy'],
+	},
+	cosmog: {
+		inherit: true,
+		types: ['Steel'],
+	},
+	cosmoem: {
+		inherit: true,
+		types: ['Normal', 'Fire'],
+	},
+	solgaleo: {
+		inherit: true,
+		types: ['Ghost', 'Fairy'],
+	},
+	lunala: {
+		inherit: true,
+		types: ['Bug', 'Flying'],
+	},
+	necrozma: {
+		inherit: true,
+		types: ['Electric', 'Bug'],
+	},
 };
