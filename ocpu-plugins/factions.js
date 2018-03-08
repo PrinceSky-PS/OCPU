@@ -293,7 +293,7 @@ exports.commands = {
 
 			let priv = false;
 			let approve = true;
-			if (!user.can('broadcast')) {
+			if (!user.can('lock')) {
 				priv = true;
 				approve = false;
 			}
