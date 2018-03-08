@@ -277,7 +277,7 @@ exports.BattlePokedex = {
 		inherit: true,
 		types: ['Ground', 'Fire'],
 	},
-	silvaly: {
+	silvally: {
 		inherit: true,
 		types: ['Flying'],
 	},
