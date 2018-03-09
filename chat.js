@@ -288,7 +288,7 @@ class CommandContext {
 
 		// Output the message
 
-if (message && message !== true && typeof message.then !== 'function') {
+		if (message && message !== true && typeof message.then !== 'function') {
 			if (this.pmTarget) {
 				Chat.sendPM(message, this.user, this.pmTarget);
 			} else {
