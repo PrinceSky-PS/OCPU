@@ -106,7 +106,7 @@ exports.commands = {
 	},
 	roomeventshelp: [
 		`/roomevents - Displays a list of upcoming room-specific events.`,
-		`/roomevents add [event name] | [event date/time] | [event description] - Adds a room event. Requires: # & ~`,
+		`/roomevents add [event name] | [event date/time] | [event description] | [event creator] - Adds a room event. Requires: # & ~`,
 		`/roomevents remove [event name] - Deletes an event. Requires: # & ~`,
 		`/roomevents view [event name] - Displays information about a specific event.`,
 	],
