@@ -38,8 +38,8 @@ exports.commands = {
 
 			eventName = eventName.trim();
 			date = date.trim();
+			creator = creator.trim();
 			desc = desc.join(target.includes('|') ? '|' : ',').trim();
-			creator = this.user;
 
 			if (eventName.length > 50) return this.errorReply("Event names should not exceed 50 characters.");
 			if (date.length > 150) return this.errorReply("Event dates should not exceed 150 characters.");
@@ -98,7 +98,7 @@ exports.commands = {
 
 			if (!this.runBroadcast()) return;
 			this.sendReplyBox(`<table border="1" cellspacing="0" cellpadding="3"><tr><td>${Chat.escapeHTML(room.events[target].eventName)}</td><td>${Chat.formatText(room.events[target].desc, true)}</td><td>${Chat.escapeHTML(room.events[target].date)}</td><td>${Chat.escapeHTML(room.events[target].creator)}</td></tr></table>`);
-			if (!this.broadcasting && user.can('declare', null, room)) this.sendReplyBox(Chat.html`<code>/roomevents add ${room.events[target].eventName} | ${room.events[target].date} | ${room.events[target].desc}</code>`);
+			if (!this.broadcasting && user.can('declare', null, room)) this.sendReplyBox(Chat.html`<code>/roomevents add ${room.events[target].eventName} | ${room.events[target].date} | ${room.events[target].desc} | ${room.events[target].creator</code>`);
 		},
 		help: function (target, room, user) {
 			return this.parse('/help roomevents');
