@@ -366,7 +366,7 @@ exports.grouplist = [
 		symbol: '&',
 		id: "leader",
 		name: "Leader",
-		inherit: '@',
+		inherit: '^',
 		jurisdiction: 'u',
 		promote: 'u',
 		roomowner: true,
