@@ -98,7 +98,7 @@ exports.commands = {
 
 			if (!this.runBroadcast()) return;
 			this.sendReplyBox(`<table border="1" cellspacing="0" cellpadding="3"><tr><td>${Chat.escapeHTML(room.events[target].eventName)}</td><td>${Chat.formatText(room.events[target].desc, true)}</td><td>${Chat.escapeHTML(room.events[target].date)}</td><td>${Chat.escapeHTML(room.events[target].creator)}</td></tr></table>`);
-			if (!this.broadcasting && user.can('declare', null, room)) this.sendReplyBox(Chat.html`<code>/roomevents add ${room.events[target].eventName} | ${room.events[target].date} | ${room.events[target].desc} | ${room.events[target].creator</code>`);
+			if (!this.broadcasting && user.can('declare', null, room)) this.sendReplyBox(Chat.html`<code>/roomevents add ${room.events[target].eventName} | ${room.events[target].date} | ${room.events[target].desc} | ${room.events[target].creator}</code>`);
 		},
 		help: function (target, room, user) {
 			return this.parse('/help roomevents');
