@@ -61,5 +61,16 @@ exports.BattleScripts = {
 		this.modData('Pokedex', 'diancie').types = ['Ice', 'Fighting'];
 		this.modData('Pokedex', 'hoopa').types = ['Ice', 'Electric'];
 		this.modData('Pokedex', 'volcanion').types = ['Fighting', 'Ice'];
+		this.modData('Pokedex', 'typenull').types = ['Ground', 'Fire'];
+		this.modData('Pokedex', 'silvally').types = ['Flying'];
+		this.modData('Pokedex', 'tapukoko').types = ['Water', 'Dark'];
+		this.modData('Pokedex', 'tapulele').types = ['Fairy', 'Electric'];
+		this.modData('Pokedex', 'tapubulu').types = ['Ghost', 'Poison'];
+		this.modData('Pokedex', 'tapufini').types = ['Grass', 'Fairy'];
+		this.modData('Pokedex', 'cosmog').types = ['Steel'];
+		this.modData('Pokedex', 'cosmoem').types = ['Normal', 'Fire'];
+		this.modData('Pokedex', 'solgaleo').types = ['Ghost', 'Fairy'];
+		this.modData('Pokedex', 'lunala').types = ['Bug', 'Flying'];
+		this.modData('Pokedex', 'necrozma').types = ['Electric', 'Steel'];
 	},
 };

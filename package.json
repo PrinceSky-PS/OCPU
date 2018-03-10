@@ -63,10 +63,10 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^8.0.32",
+    "@types/node": "^9.4.6",
     "@types/nodemailer": "^4.3.0",
     "eslint": "^4.16.0",
-    "mocha": "^4.0.1",
+    "mocha": "^5.0.2",
     "typescript": "^2.6.1"
   }
 }

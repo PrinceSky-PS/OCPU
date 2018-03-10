@@ -438,6 +438,9 @@ exports.commands = {
 			connection.send(error);
 			return;
 		}
+		if (targetUser.ignorePMs === true && this.can('lock')) {
+			connection.send(`|pm|${this.user.getIdentity()}| ${this.targetUsername}|This user is ignoring PMs. They may not respond to you soon.`);
+		}
 		this.pmTarget = targetUser;
 		this.room = undefined;
 
