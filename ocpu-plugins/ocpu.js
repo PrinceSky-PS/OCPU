@@ -1117,7 +1117,7 @@ exports.commands = {
 			targetUser.send("|nametaken||Your name conflicts with " + user.name + (user.name.substr(-1) === "s" ? "'" : "'s") + " new away status.");
 		}
 
-		if (user.can('mute', null, room)) this.add("|raw|-- " + OCPU.nameColor(user.name, true) + " is now " + target.toLowerCase() + ".");
+		if (user.can('mute', null, room)) this.add("|raw|-- " + OCPU.nameColor(user.name, true) + " is now away for " + target.toLowerCase() + ".");
 		if (user.can('lock')) this.parse('/hide');
 		user.forceRename(newName, user.registered);
 		user.updateIdentity();
@@ -1142,7 +1142,7 @@ exports.commands = {
 		user.forceRename(newName, user.registered);
 		user.updateIdentity();
 		user.isAway = false;
-		if (user.can('mute', null, room)) this.add("|raw|-- " + OCPU.nameColor(user.userid, true) + " is no longer " + status.toLowerCase() + ".");
+		if (user.can('mute', null, room)) this.add("|raw|-- " + OCPU.nameColor(user.userid, true) + " is no longer away for " + status.toLowerCase() + ".");
 		if (user.can('lock')) this.parse('/show');
 	},
 	backhelp: ["/back - Sets a users away status back to normal."],
