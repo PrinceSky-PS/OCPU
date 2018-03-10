@@ -39,6 +39,7 @@ exports.commands = {
 			eventName = eventName.trim();
 			date = date.trim();
 			desc = desc.join(target.includes('|') ? '|' : ',').trim();
+			let creator = this.user;
 
 			if (eventName.length > 50) return this.errorReply("Event names should not exceed 50 characters.");
 			if (date.length > 150) return this.errorReply("Event dates should not exceed 150 characters.");
@@ -61,6 +62,7 @@ exports.commands = {
 				eventName: eventName,
 				date: date,
 				desc: desc,
+				creator: creator,
 			};
 			this.privateModAction(`(${user.name} ${this.cmd}ed ${this.cmd === 'add' ? 'a' : 'the'} roomevent titled "${eventName}".)`);
 			this.modlog('ROOMEVENT', null, `${this.cmd}ed "${eventName}"`);
@@ -95,7 +97,7 @@ exports.commands = {
 			if (!room.events[target]) return this.errorReply(`There is no such event named '${target}'. Check spelling?`);
 
 			if (!this.runBroadcast()) return;
-			this.sendReplyBox(`<table border="1" cellspacing="0" cellpadding="3"><tr><td>${Chat.escapeHTML(room.events[target].eventName)}</td><td>${Chat.formatText(room.events[target].desc, true)}</td><td>${Chat.escapeHTML(room.events[target].date)}</td></tr></table>`);
+			this.sendReplyBox(`<table border="1" cellspacing="0" cellpadding="3"><tr><td>${Chat.escapeHTML(room.events[target].eventName)}</td><td>${Chat.formatText(room.events[target].desc, true)}</td><td>${Chat.escapeHTML(room.events[target].date)}</td><td>${Chat.escapeHTML(room.events[target].creator)}</td></tr></table>`);
 			if (!this.broadcasting && user.can('declare', null, room)) this.sendReplyBox(Chat.html`<code>/roomevents add ${room.events[target].eventName} | ${room.events[target].date} | ${room.events[target].desc}</code>`);
 		},
 		help: function (target, room, user) {
