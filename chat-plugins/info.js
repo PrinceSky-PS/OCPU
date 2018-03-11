@@ -1275,7 +1275,7 @@ exports.commands = {
 	'!forums': true,
 	forums: function (target, room, user) {
 		if (!this.runBroadcast()) return;
-		this.sendReplyBox(`<a href="http://www.smogon.com/forums/forums/209/">Pok&eacute;mon Showdown Forums</a>`);
+		this.sendReplyBox(`<a href="https://ocpu-forum.000webhostapp.com/index.php">Server Forum</a>`);
 	},
 
 	'!privacypolicy': true,
