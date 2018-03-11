@@ -872,6 +872,14 @@ class GlobalRoom extends BasicRoom {
 				} else {
 					curRoom.addRaw(`<div class="broadcast-red"><b>The server needs to restart because of a crash.</b><br />No new battles can be started until the server is done restarting.</div>`).update();
 				}
+				if (id === 'lobby') {
+					if (curRoom.modchat !== '%') {
+						curRoom.modchat = '%';
+						curRoom.addRaw(`<div class="broadcast-red"><b>Moderated chat was set to % due to an error</b><br />Please do not panic and PM staff constantly because of this.</div>`).update();
+					}
+					// @ts-ignore
+					OCPU.pmStaff("Please go to Lobby and explain what is happening (if a staff member is already doing so, then don't. It will just add confusion.");
+				}
 			} else {
 				curRoom.addRaw(`<div class="broadcast-red"><b>The server is restarting soon.</b><br />Please finish your battles quickly. No new battles can be started until the server resets in a few minutes.</div>`).update();
 			}
