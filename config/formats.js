@@ -19,7 +19,7 @@ exports.Formats = [
 		mod: 'insanity',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Cancel Mod'],
 	},
-	{
+	/*{
 		name: "[Gen 7] Random Monotype",
 		desc: [
 			`All the Pok&eacute;mon on a team must share a type.`,
@@ -37,8 +37,8 @@ exports.Formats = [
 			'Marshadow', 'Mawile-Mega', 'Medicham-Mega', 'Metagross-Mega', 'Mewtwo', 'Naganadel', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane', 'Palkia',
 			'Pheromosa', 'Rayquaza', 'Reshiram', 'Salamence-Mega', 'Shaymin-Sky', 'Solgaleo', 'Tapu Lele', 'Xerneas', 'Yveltal', 'Zekrom', 'Zygarde',
 			'Battle Bond', 'Shadow Tag', 'Damp Rock', 'Smooth Rock', 'Terrain Extender', 'Baton Pass',
-		],*/
-	},
+		],
+	},*/
 
 	// US/UM Singles
 	///////////////////////////////////////////////////////////////////
