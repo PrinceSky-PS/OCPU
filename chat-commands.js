@@ -1428,6 +1428,9 @@ exports.commands = {
 		let group = Users.usergroups[targetId];
 		if (group) {
 			buffer.push('Global auth: ' + group.charAt(0));
+			if (group === '&' || group === '~') {
+				buffer.push('This user is a part of Upper Staff. If they have no revelent room auth, they will have authority.');
+			}
 		}
 		Rooms.rooms.forEach((curRoom, id) => {
 			if (!curRoom.auth || curRoom.isPrivate) return;
