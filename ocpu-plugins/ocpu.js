@@ -1122,6 +1122,8 @@ exports.commands = {
 		user.forceRename(newName, user.registered);
 		user.updateIdentity();
 		user.isAway = true;
+		this.parse('/blockchallenges');
+		this.parse('/blockpms ' + target);
 	},
 	awayhelp: ["/away [message] - Sets a user's away status."],
 
@@ -1144,6 +1146,8 @@ exports.commands = {
 		user.isAway = false;
 		if (user.can('mute', null, room)) this.add("|raw|-- " + OCPU.nameColor(user.userid, true) + " is no longer away for " + status.toLowerCase() + ".");
 		if (user.can('lock')) this.parse('/show');
+		this.parse('/unblockpms');
+		this.parse('/unblockchallenges');
 	},
 	backhelp: ["/back - Sets a users away status back to normal."],
 
