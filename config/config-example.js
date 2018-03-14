@@ -353,6 +353,7 @@ exports.github = {
 //   OCPU-specific permissions:
 //     - customtitle: Allows special profile management.
 //     - faction: Allows special management of all factions on this server
+//     - pban: Enables the usage of the perma-ban, perma-lock, and other commands like such
 
 exports.grouplist = [
 	{
@@ -385,6 +386,7 @@ exports.grouplist = [
 		tournamentsmanagement: true,
 		gamemanagement: true,
 		exportinputlog: true,
+		pban: true,
 	},
 	{
 		symbol: '^',
