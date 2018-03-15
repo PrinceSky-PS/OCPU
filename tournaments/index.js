@@ -948,6 +948,8 @@ class Tournament {
 				});
 			});
 			this.room.addRaw("<b><font color='" + color + "'>" + Chat.escapeHTML(winner) + "</font> has won " + "<font color='" + color + "'>" + firstMoney + " </font>" + (firstMoney === 1 ? global.currencyName : global.currencyPlural) + " for winning the tournament!</b>");
+			OCPU.ExpControl.addExp(wid, this.room, 15);
+			this.room.addRaw("<b><font color='" + color + "'>" + Chat.escapeHTML(winner) + "</font> has also won " + "<font color='" + color + "'> 15 EXP for winning the tournament!</b>");
 
 			if (runnerUp) {
 				Economy.writeMoney(rid, secondMoney, () => {
@@ -959,6 +961,8 @@ class Tournament {
 					});
 				});
 				this.room.addRaw("<b><font color='" + color + "'>" + Chat.escapeHTML(runnerUp) + "</font> has won " + "<font color='" + color + "'>" + secondMoney + "</font>" + (firstMoney === 1 ? global.currencyName : global.currencyPlural) + " for winning the tournament!</b>");
+				OCPU.ExpControl.addExp(rid, this.room, 10);
+				this.room.addRaw("<b><font color='" + color + "'>" + Chat.escapeHTML(runnerUp) + "</font> has also won " + "<font color='" + color + "'> 10 EXP for winning the tournament!</b>");
 			}
 
 			if (OCPU.getFaction(winner)) {
@@ -972,7 +976,7 @@ class Tournament {
 		delete exports.tournaments[this.room.id];
 		delete this.room.game;
 		for (let i in this.players) {
-			OCPU.ExpControl.addExp(this.players[i].userid, this.room, 20);
+			OCPU.ExpControl.addExp(this.players[i].userid, this.room, 5);
 			this.players[i].destroy();
 		}
 	}
