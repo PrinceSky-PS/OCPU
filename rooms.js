@@ -428,6 +428,11 @@ class GlobalRoom extends BasicRoom {
 		 * @type {string[]}
 		 */
 		this.staffAutojoinList = [];
+		/**
+		 * Rooms that upperstaff autojoin upon connecting
+		 * @type {string[]}
+		 */
+		this.upperStaffAutojoinList = [];
 		for (let i = 0; i < this.chatRoomDataList.length; i++) {
 			if (!this.chatRoomDataList[i] || !this.chatRoomDataList[i].title) {
 				Monitor.warn(`ERROR: Room number ${i} has no data and could not be loaded.`);
@@ -793,6 +798,21 @@ class GlobalRoom extends BasicRoom {
 				// if staffAutojoin is true: autojoin if isStaff
 				// if staffAutojoin is String: autojoin if user.group in staffAutojoin
 				// if staffAutojoin is anything truthy: autojoin if user has any roomauth
+				user.joinRoom(room.id, connection);
+			}
+		}
+		for (let i = 0; i < this.upperStaffAutojoinList.length; i++) {
+			let room = /** @type {ChatRoom} */ (Rooms(this.upperStaffAutojoinList[i]));
+			if (!room) {
+				this.upperStaffAutoJoinList.splice(i, 1);
+				i--;
+				continue;
+			}
+			if (room.upperStaffAutoJoin === 'string' && room.upperStaffAutojoin.includes(user.group) ||
+				 room.auth && user.userid in room.auth) {
+				// if upperStaffAutojoin is true: autojoin is isUpperStaff
+				// if upperStaffAutojoin is String: autojoin if user,group in upperStaffUpperJoin
+				// if upperStaffAutojoin is anything truthy: autojoin if user has any roomauth
 				user.joinRoom(room.id, connection);
 			}
 		}
