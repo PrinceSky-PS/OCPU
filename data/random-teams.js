@@ -5,7 +5,6 @@ const PRNG = require('./../sim/prng');
 
 const randomBSSFactorySets = require('./bss-factory-sets.json');
 const randomFactorySets = require('./factory-sets.json');
-const randomGen6FactorySets = require('./gen-6-factory-sets.json');
 
 class RandomTeams extends Dex.ModdedDex {
 	constructor(format, prng) {
@@ -13,7 +12,6 @@ class RandomTeams extends Dex.ModdedDex {
 		super(format.mod);
 		this.randomBSSFactorySets = randomBSSFactorySets;
 		this.randomFactorySets = randomFactorySets;
-		this.randomGen6FactorySets = randomGen6FactorySets;
 
 		this.factoryTier = '';
 		this.format = format;
@@ -26,6 +24,12 @@ class RandomTeams extends Dex.ModdedDex {
 	randomChance(numerator, denominator) {
 		return this.prng.randomChance(numerator, denominator);
 	}
+<<<<<<< HEAD
+=======
+	sample(items) {
+		return this.prng.sample(items);
+	}
+>>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 	random(m, n) {
 		return this.prng.next(m, n);
 	}
@@ -104,7 +108,7 @@ class RandomTeams extends Dex.ModdedDex {
 			let item = '';
 			if (this.gen >= 2) {
 				do {
-					item = items[this.random(items.length)];
+					item = this.sample(items);
 				} while (this.getItem(item).gen > this.gen || this.data.Items[item].isNonstandard);
 			}
 
@@ -118,14 +122,14 @@ class RandomTeams extends Dex.ModdedDex {
 			let itemData = this.getItem(item);
 			if (itemData.forcedForme && species === this.getTemplate(itemData.forcedForme).baseSpecies) {
 				do {
-					item = items[this.random(items.length)];
+					item = this.sample(items);
 					itemData = this.getItem(item);
 				} while (itemData.gen > this.gen || itemData.isNonstandard || itemData.forcedForme && species === this.getTemplate(itemData.forcedForme).baseSpecies);
 			}
 
 			// Random legal ability
 			let abilities = Object.values(template.abilities).filter(a => this.getAbility(a).gen <= this.gen);
-			let ability = this.gen <= 2 ? 'None' : abilities[this.random(abilities.length)];
+			let ability = this.gen <= 2 ? 'None' : this.sample(abilities);
 
 			// Four random unique moves from the movepool
 			let moves;
@@ -152,7 +156,7 @@ class RandomTeams extends Dex.ModdedDex {
 			let s = ["hp", "atk", "def", "spa", "spd", "spe"];
 			let evpool = 510;
 			do {
-				let x = s[this.random(s.length)];
+				let x = this.sample(s);
 				let y = this.random(Math.min(256 - evs[x], evpool + 1));
 				evs[x] += y;
 				evpool -= y;
@@ -162,7 +166,7 @@ class RandomTeams extends Dex.ModdedDex {
 			let ivs = {hp: this.random(32), atk: this.random(32), def: this.random(32), spa: this.random(32), spd: this.random(32), spe: this.random(32)};
 
 			// Random nature
-			let nature = natures[this.random(natures.length)];
+			let nature = this.sample(natures);
 
 			// Level balance--calculate directly from stats rather than using some silly lookup table
 			let mbstmin = 1307; // Sunkern has the lowest modified base stat total, and that total is 807
@@ -245,7 +249,7 @@ class RandomTeams extends Dex.ModdedDex {
 			if (!formes[i].length) {
 				throw new Error("Invalid pokemon gen " + this.gen + ": " + JSON.stringify(formes) + " numbers " + JSON.stringify(hasDexNumber));
 			}
-			sixPokemon.push(formes[i][this.random(formes[i].length)]);
+			sixPokemon.push(this.sample(formes[i]));
 		}
 		return sixPokemon;
 	}
@@ -294,7 +298,7 @@ class RandomTeams extends Dex.ModdedDex {
 			if (this.gen === 6) {
 				let evpool = 510;
 				do {
-					let x = s[this.random(s.length)];
+					let x = this.sample(s);
 					let y = this.random(Math.min(256 - evs[x], evpool + 1));
 					evs[x] += y;
 					evpool -= y;
@@ -307,7 +311,7 @@ class RandomTeams extends Dex.ModdedDex {
 			let ivs = {hp: this.random(32), atk: this.random(32), def: this.random(32), spa: this.random(32), spd: this.random(32), spe: this.random(32)};
 
 			// Random nature
-			let nature = naturePool[this.random(naturePool.length)];
+			let nature = this.sample(naturePool);
 
 			// Level balance
 			let mbstmin = 1307;
@@ -521,7 +525,7 @@ class RandomTeams extends Dex.ModdedDex {
 		}
 		let battleForme = this.checkBattleForme(template);
 		if (battleForme && battleForme.randomBattleMoves && (battleForme.isMega ? !teamDetails.megaStone : this.random(2))) {
-			template = this.getTemplate(template.otherFormes.length >= 2 ? template.otherFormes[this.random(template.otherFormes.length)] : template.otherFormes[0]);
+			template = this.getTemplate(template.otherFormes.length >= 2 ? this.sample(template.otherFormes) : template.otherFormes[0]);
 		}
 
 		let movePool = (template.randomBattleMoves ? template.randomBattleMoves.slice() : Object.keys(template.learnset));
@@ -1109,7 +1113,7 @@ class RandomTeams extends Dex.ModdedDex {
 						}
 					}
 					if (rejectableMoves.length) {
-						moves.splice(rejectableMoves[this.random(rejectableMoves.length)], 1);
+						moves.splice(this.sample(rejectableMoves), 1);
 					}
 				}
 			}
@@ -1281,7 +1285,7 @@ class RandomTeams extends Dex.ModdedDex {
 				// Judgment doesn't change type with Z-Crystals
 				item = template.requiredItems[0];
 			} else {
-				item = template.requiredItems[this.random(template.requiredItems.length)];
+				item = this.sample(template.requiredItems);
 			}
 		} else if (hasMove['magikarpsrevenge']) {
 			// PoTD Magikarp
@@ -1328,7 +1332,11 @@ class RandomTeams extends Dex.ModdedDex {
 		} else if (template.species === 'Unown') {
 			item = 'Choice Specs';
 		} else if (template.species === 'Wobbuffet') {
+<<<<<<< HEAD
 			item = hasMove['destinybond'] ? 'Custap Berry' : ['Leftovers', 'Sitrus Berry'][this.random(2)];
+=======
+			item = hasMove['destinybond'] ? 'Custap Berry' : this.sample(['Leftovers', 'Sitrus Berry']);
+>>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		} else if (template.species === 'Raichu-Alola' && hasMove['thunderbolt'] && !teamDetails.zMove && this.randomChance(1, 4)) {
 			item = 'Aloraichium Z';
 		} else if (template.species === 'Zygarde-10%' && hasMove['substitute'] && !teamDetails.zMove) {
@@ -1363,7 +1371,11 @@ class RandomTeams extends Dex.ModdedDex {
 			item = 'Soul Dew';
 		} else if (hasMove['bellydrum']) {
 			if (ability === 'Gluttony') {
+<<<<<<< HEAD
 				item = ['Aguav', 'Figy', 'Iapapa', 'Mago', 'Wiki'][this.random(5)] + ' Berry';
+=======
+				item = this.sample(['Aguav', 'Figy', 'Iapapa', 'Mago', 'Wiki']) + ' Berry';
+>>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 			} else if (template.baseStats.spe <= 50 && !teamDetails.zMove && this.randomChance(1, 2)) {
 				item = 'Normalium Z';
 			} else {
@@ -1551,7 +1563,7 @@ class RandomTeams extends Dex.ModdedDex {
 		// For Monotype
 		let isMonotype = this.format.id === 'gen7monotyperandombattle';
 		let typePool = Object.keys(this.data.TypeChart);
-		let type = typePool[this.random(typePool.length)];
+		let type = this.sample(typePool);
 
 		let pokemonPool = [];
 		for (let id in this.data.FormatsData) {
@@ -1731,7 +1743,11 @@ class RandomTeams extends Dex.ModdedDex {
 		}
 		let battleForme = this.checkBattleForme(template);
 		if (battleForme && (battleForme.isMega ? !teamDetails.megaStone : this.randomChance(1, 2))) {
+<<<<<<< HEAD
 			template = this.getTemplate(template.otherFormes.length >= 2 ? template.otherFormes[this.random(template.otherFormes.length)] : template.otherFormes[0]);
+=======
+			template = this.getTemplate(template.otherFormes.length >= 2 ? this.sample(template.otherFormes) : template.otherFormes[0]);
+>>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		}
 
 		let movePool = (template.randomDoubleBattleMoves || template.randomBattleMoves);
@@ -2157,7 +2173,7 @@ class RandomTeams extends Dex.ModdedDex {
 						}
 					}
 					if (rejectableMoves.length) {
-						moves.splice(rejectableMoves[this.random(rejectableMoves.length)], 1);
+						moves.splice(this.sample(rejectableMoves), 1);
 					}
 				}
 			}
@@ -2320,7 +2336,7 @@ class RandomTeams extends Dex.ModdedDex {
 				// Judgment doesn't change type with Z-Crystals
 				item = template.requiredItems[0];
 			} else {
-				item = template.requiredItems[this.random(template.requiredItems.length)];
+				item = this.sample(template.requiredItems);
 			}
 		} else if (ability === 'Imposter') {
 			item = 'Choice Scarf';
@@ -2338,7 +2354,7 @@ class RandomTeams extends Dex.ModdedDex {
 				item = 'Choice Scarf';
 			}
 		} else if (ability === 'Gluttony' || ability === 'Schooling') {
-			item = ['Aguav', 'Figy', 'Iapapa', 'Mago', 'Wiki'][this.random(5)] + ' Berry';
+			item = this.sample(['Aguav', 'Figy', 'Iapapa', 'Mago', 'Wiki']) + ' Berry';
 		} else if (hasMove['bellydrum']) {
 			if (template.baseStats.spe <= 50 && !teamDetails.zMove && this.randomChance(1, 2)) {
 				item = 'Normalium Z';
@@ -2553,7 +2569,7 @@ class RandomTeams extends Dex.ModdedDex {
 			'hydration': 'raindance', 'swiftswim': 'raindance',
 			'leafguard': 'sunnyday', 'solarpower': 'sunnyday', 'chlorophyll': 'sunnyday',
 			'sandforce': 'sandstorm', 'sandrush': 'sandstorm', 'sandveil': 'sandstorm',
-			'snowcloak': 'hail',
+			'slushrush': 'hail', 'snowcloak': 'hail',
 		};
 		let weatherAbilities = ['drizzle', 'drought', 'snowwarning', 'sandstream'];
 
@@ -2600,17 +2616,17 @@ class RandomTeams extends Dex.ModdedDex {
 			}
 		}
 
-		let setData = effectivePool[this.random(effectivePool.length)];
+		let setData = this.sample(effectivePool);
 		let moves = [];
 		for (let i = 0; i < setData.set.moves.length; i++) {
 			let moveSlot = setData.set.moves[i];
-			moves.push(setData.moveVariants ? moveSlot[setData.moveVariants[i]] : moveSlot[this.random(moveSlot.length)]);
+			moves.push(setData.moveVariants ? moveSlot[setData.moveVariants[i]] : this.sample(moveSlot));
 		}
 
 		let items = [];
 		if (Array.isArray(setData.set.item) === true) {
 			let randomItem = setData.set.item;
-			items.push(setData.itemVariants ? randomItem[setData.itemVariants] : randomItem[this.random(randomItem.length)]);
+			items.push(setData.itemVariants ? randomItem[setData.itemVariants] : this.sample(randomItem));
 		} else {
 			items.push(setData.set.item);
 		}
@@ -2618,7 +2634,7 @@ class RandomTeams extends Dex.ModdedDex {
 		let abilities = [];
 		if (Array.isArray(setData.set.ability) === true) {
 			let randomAbility = setData.set.ability;
-			abilities.push(setData.abilityVariants ? randomAbility[setData.abilityVariants] : randomAbility[this.random(randomAbility.length)]);
+			abilities.push(setData.abilityVariants ? randomAbility[setData.abilityVariants] : this.sample(randomAbility));
 		} else {
 			abilities.push(setData.set.ability);
 		}
@@ -2644,14 +2660,14 @@ class RandomTeams extends Dex.ModdedDex {
 		// The teams generated depend on the tier choice in such a way that
 		// no exploitable information is leaked from rolling the tier in getTeam(p1).
 		let availableTiers = ['Uber', 'OU', 'UU', 'RU', 'NU', 'PU', 'LC', 'Mono'];
-		if (!this.FactoryTier) this.FactoryTier = availableTiers[this.random(availableTiers.length)];
+		if (!this.FactoryTier) this.FactoryTier = this.sample(availableTiers);
 		const chosenTier = this.FactoryTier;
 
 		let pokemon = [];
 		let pokemonPool = Object.keys(this.randomFactorySets[chosenTier]);
 
 		let typePool = Object.keys(this.data.TypeChart);
-		const type = typePool[this.random(typePool.length)];
+		const type = this.sample(typePool);
 
 		let teamData = {typeCount: {}, typeComboCount: {}, baseFormes: {}, megaCount: 0, zCount: 0, has: {}, forceResult: forceResult, weaknesses: {}, resistances: {}};
 		let requiredMoveFamilies = ['hazardSet', 'hazardClear'];
@@ -2781,6 +2797,7 @@ class RandomTeams extends Dex.ModdedDex {
 
 		return pokemon;
 	}
+<<<<<<< HEAD
 	randomGen6FactorySet(template, slot, teamData, tier) {
 		let speciesId = toId(template.species);
 		// let flags = this.randomGen6FactorySets[tier][speciesId].flags;
@@ -2994,6 +3011,8 @@ class RandomTeams extends Dex.ModdedDex {
 
 		return pokemon;
 	}
+=======
+>>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 	randomBSSFactorySet(template, slot, teamData, tier) {
 		let speciesId = toId(template.species);
 		// let flags = this.randomBSSFactorySets[tier][speciesId].flags;
@@ -3053,11 +3072,11 @@ class RandomTeams extends Dex.ModdedDex {
 			}
 		}
 
-		let setData = effectivePool[this.random(effectivePool.length)];
+		let setData = this.sample(effectivePool);
 		let moves = [];
 		for (let i = 0; i < setData.set.moves.length; i++) {
 			let moveSlot = setData.set.moves[i];
-			moves.push(setData.moveVariants ? moveSlot[setData.moveVariants[i]] : moveSlot[this.random(moveSlot.length)]);
+			moves.push(setData.moveVariants ? moveSlot[setData.moveVariants[i]] : this.sample(moveSlot));
 		}
 
 		return {
