@@ -97,8 +97,6 @@ class PRNG {
 	}
 
 	/**
-<<<<<<< HEAD
-=======
 	 * Return a random item from the given array.
 	 *
 	 * This function chooses items in the array with equal probability.
@@ -128,7 +126,6 @@ class PRNG {
 	}
 
 	/**
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		The RNG is a Linear Congruential Generator (LCG) in the form: `x_{n + 1} = (a x_n + c) % m`
 
 		Where: `x_0` is the seed, `x_n` is the random number after n iterations,
