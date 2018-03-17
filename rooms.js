@@ -808,7 +808,9 @@ class GlobalRoom extends BasicRoom {
 				i--;
 				continue;
 			}
+			// @ts-ignore
 			if (room.upperStaffAutojoin === true && user.isUpperStaff ||
+				 // @ts-ignore
 				 typeof room.upperStaffAutojoin === 'string' && room.upperStaffAutojoin.includes(user.group) ||
 				 room.auth && user.userid in room.auth) {
 				// if upperStaffAutojoin is true: autojoin is isUpperStaff
