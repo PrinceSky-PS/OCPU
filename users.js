@@ -492,6 +492,7 @@ class User {
 		// settings
 		this.isSysop = false;
 		this.isStaff = false;
+		this.isUpperStaff = false;
 		this.blockChallenges = false;
 		this.ignorePMs = false;
 		this.lastConnected = 0;
@@ -1097,6 +1098,7 @@ class User {
 			this.registered = false;
 			this.group = Config.groupsranking[0];
 			this.isStaff = false;
+			this.isUpperStaff = false;
 			return;
 		}
 		this.registered = true;
@@ -1111,9 +1113,14 @@ class User {
 		}
 
 		this.isStaff = Config.groups[this.group] && (Config.groups[this.group].lock || Config.groups[this.group].root);
+		this.isUpperStaff = Config.groups[this.group] && (Config.groups[this.group].forcewin || Config.groups[this.group].root);
 		if (!this.isStaff) {
 			let staffRoom = Rooms('staff');
 			this.isStaff = (staffRoom && staffRoom.auth && staffRoom.auth[this.userid]);
+		}
+		if (!this.isUpperStaff) {
+			let staffRoom = Rooms('upperstaff');
+			this.isUpperStaff = (staffRoom && staffRoom.auth && staffRoom.auth[this.userid]);
 		}
 		if (this.trusted) {
 			if (this.locked && this.permalocked) {
@@ -1143,9 +1150,14 @@ class User {
 		if (!group) throw new Error(`Falsy value passed to setGroup`);
 		this.group = group.charAt(0);
 		this.isStaff = Config.groups[this.group] && (Config.groups[this.group].lock || Config.groups[this.group].root);
+		this.isUpperStaff = Config.groups[this.group] && (Config.groups[this.group].forcewin || Config.groups[this.group].root);
 		if (!this.isStaff) {
 			let staffRoom = Rooms('staff');
 			this.isStaff = (staffRoom && staffRoom.auth && staffRoom.auth[this.userid]);
+		}
+		if (!this.isUpperStaff) {
+			let staffRoom = Rooms('upperstaff');
+			this.isUpperStaff = (staffRoom && staffRoom.auth && staffRoom.auth[this.userid]);
 		}
 		Rooms.global.checkAutojoin(this);
 		if (this.registered) {
@@ -1188,6 +1200,7 @@ class User {
 			this.group = Config.groupsranking[0];
 			this.isSysop = false; // should never happen
 			this.isStaff = false;
+			this.isUpperStaff = false;
 			// This isn't strictly necessary since we don't reuse User objects
 			// for PS, but just in case.
 			// We're not resetting .trusted/.autoconfirmed so those accounts
@@ -1665,7 +1678,7 @@ function socketReceive(worker, workerid, socketid, message) {
 
 	const lines = message.split('\n');
 	if (!lines[lines.length - 1]) lines.pop();
-	if (lines.length > (user.isStaff || (room.auth && room.auth[user.userid] && room.auth[user.userid] !== '+') ? THROTTLE_MULTILINE_WARN_STAFF : THROTTLE_MULTILINE_WARN)) {
+	if (lines.length > (user.isStaff || user.isUpperStaff || (room.auth && room.auth[user.userid] && room.auth[user.userid] !== '+') ? THROTTLE_MULTILINE_WARN_STAFF : THROTTLE_MULTILINE_WARN)) {
 		connection.popup(`You're sending too many lines at once. Try using a paste service like [[Pastebin]].`);
 		return;
 	}
