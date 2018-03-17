@@ -804,11 +804,12 @@ class GlobalRoom extends BasicRoom {
 		for (let i = 0; i < this.upperStaffAutojoinList.length; i++) {
 			let room = /** @type {ChatRoom} */ (Rooms(this.upperStaffAutojoinList[i]));
 			if (!room) {
-				this.upperStaffAutoJoinList.splice(i, 1);
+				this.upperStaffAutojoinList.splice(i, 1);
 				i--;
 				continue;
 			}
-			if (room.upperStaffAutoJoin === 'string' && room.upperStaffAutojoin.includes(user.group) ||
+			if (room.upperStaffAutojoin === true && user.isUpperStaff ||
+				 typeof room.upperStaffAutojoin === 'string' && room.upperStaffAutojoin.includes(user.group) ||
 				 room.auth && user.userid in room.auth) {
 				// if upperStaffAutojoin is true: autojoin is isUpperStaff
 				// if upperStaffAutojoin is String: autojoin if user,group in upperStaffUpperJoin
