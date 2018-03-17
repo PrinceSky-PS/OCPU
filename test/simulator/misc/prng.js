@@ -70,8 +70,6 @@ describe(`PRNG`, function () {
 			}
 		});
 	});
-<<<<<<< HEAD
-=======
 	describe(`sample`, function () {
 		it(`should throw for a zero-item array`, function () {
 			const prng = new PRNG(testSeed);
@@ -141,5 +139,4 @@ describe(`PRNG`, function () {
 			}
 		});
 	});
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 });

@@ -108,10 +108,7 @@ exports.Formats = [
 		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3630113/">UU Suspect Test</a>`],
 
 		mod: 'gen7',
-<<<<<<< HEAD
-		challengeShow: false,
-=======
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
+
 		ruleset: ['[Gen 7] UU'],
 		unbanlist: ['Slowbro-Mega'],
 	},
@@ -452,11 +449,7 @@ exports.Formats = [
 
 		mod: 'gen7',
 		ruleset: ['Pokemon', 'Ability Clause', 'OHKO Clause', 'Evasion Moves Clause', 'CFZ Clause', 'Endless Battle Clause', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
-<<<<<<< HEAD
-		banlist: ['Groudon-Primal', 'Arena Trap', 'Huge Power', 'Innards Out', 'Magnet Pull', 'Moody', 'Parental Bond', 'Protean', 'Pure Power', 'Shadow Tag', 'Stakeout', 'Water Bubble', 'Wonder Guard', 'Gengarite', 'Chatter', 'Comatose + Sleep Talk'],
-=======
 		banlist: ['Groudon-Primal', 'Arena Trap', 'Huge Power', 'Innards Out', 'Magnet Pull', 'Moody', 'Parental Bond', 'Protean', 'Psychic Surge', 'Pure Power', 'Shadow Tag', 'Stakeout', 'Water Bubble', 'Wonder Guard', 'Gengarite', 'Chatter', 'Comatose + Sleep Talk'],
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 	},
 	{
 		name: "[Gen 7] 1v1",

@@ -336,10 +336,7 @@ class MafiaTracker extends Rooms.RoomGame {
 			this.dayNum++;
 		}
 		this.sendRoom(`Day ${this.dayNum}. The hammer count is set at ${this.hammerCount}`, {declare: true});
-<<<<<<< HEAD
-=======
 		this.sendPlayerList();
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		this.updatePlayers();
 		return true;
 	}
@@ -362,12 +359,8 @@ class MafiaTracker extends Rooms.RoomGame {
 		if (!(target in this.players) && target !== 'nolynch') return false;
 		if (!this.enableNL && target === 'nolynch') return false;
 		if (player.lynching || (target === player.userid && !this.selfEnabled)) return false;
-<<<<<<< HEAD
-		if (target === player.userid && (this.lynches[target] && this.getHammer() - 1 > this.lynches[target].count) && this.selfEnabled === 'hammer') return false;
-=======
 		if (target === player.userid && (this.hammerCount - 1 > (this.lynches[target] ? this.lynches[target].count : 0)) && this.selfEnabled === 'hammer') return false;
 		if (player.lastLynch + 2000 >= Date.now()) return user.sendTo(this.room, `|error|You must wait another ${Chat.toDurationString((player.lastLynch + 2000) - Date.now()) || '0 seconds'} before you can change your lynch.`);
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		let lynch = this.lynches[target];
 		if (!lynch) {
 			this.lynches[target] = {count: 1, lastLynch: Date.now(), dir: 'up', lynchers: [user.userid]};
@@ -379,13 +372,9 @@ class MafiaTracker extends Rooms.RoomGame {
 			lynch.lynchers.push(user.userid);
 		}
 		player.lynching = target;
-<<<<<<< HEAD
-		this.sendRoom(`${user.name} has lynched ${player.lynching}.`, {timestamp: true, user: user});
-=======
 		let name = player.lynching === 'nolynch' ? 'No Lynch' : this.players[player.lynching].name;
 		this.sendRoom(name === 'No Lynch' ? `${user.name} has abstained from lynching.` : `${user.name} has lynched ${name}.`, {timestamp: true, user: user});
 		player.lastLynch = Date.now();
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		if (this.hammerCount <= lynch.count) {
 			// HAMMER
 			this.sendRoom(`Hammer! ${target === 'nolynch' ? 'Nobody' : name} was lynched!`, {declare: true});
@@ -799,13 +788,8 @@ exports.pages = {
 		}
 		if (room.game.phase === "day") {
 			buf += `<h3>Lynches (Hammer: ${room.game.hammerCount}) <button class="button" name="send" value="/join view-mafia-${room.id}"><i class="fa fa-refresh"></i> Refresh</button></h3>`;
-<<<<<<< HEAD
-			let plur = room.game.hasPlurality;
-			let list = Object.keys(room.game.players).concat(['nolynch']);
-=======
 			let plur = room.game.getPlurality();
 			let list = Object.keys(room.game.players).concat((room.game.enableNL ? ['nolynch'] : []));
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 			for (let key of list) {
 				if (room.game.lynches[key]) {
 					buf += `<p style="font-weight:bold">${room.game.lynches[key].count}${plur === key ? '*' : ''} ${room.game.players[key] ? room.game.players[key].name : 'No-Lynch'} (${room.game.lynches[key].lynchers.join(', ')}) `;
@@ -840,11 +824,7 @@ exports.pages = {
 			} else if (room.game.phase === 'night') {
 				buf += `<button class="button" name="send" value="/mafia day ${room.id}">Go to Day ${room.game.dayNum + 1}</button> <button class="button" name="send" value="/mafia extend ${room.id}">Return to Day ${room.game.dayNum}</button>`;
 			}
-<<<<<<< HEAD
-			buf += ` <button class="button" name="send" value="/mafia selflynch ${room.id}, ${room.game.selfEnabled === true ? 'off' : 'on'}">${room.game.selfEnabled === true ? 'Disable' : 'Enable'} self lynching</button> <button class="button" name="send" value="/mafia selflynch ${room.id}, ${room.game.selfEnabled === 'hammer' ? 'off' : 'hammer'}">${room.game.selfEnabled === 'hammer' ? 'Disable' : 'Enable'} self hammer</button> <button class="button" name="send" value="/mafia reveal ${room.id}, ${room.game.noReveal ? 'off' : 'on'}">${room.game.noReveal ? 'Enable' : 'Disable'} revealing of roles</button> <button class="button" name="send" value="/mafia end ${room.id}">End Game</button>`;
-=======
 			buf += ` <button class="button" name="send" value="/mafia selflynch ${room.id}, ${room.game.selfEnabled === true ? 'off' : 'on'}">${room.game.selfEnabled === true ? 'Disable' : 'Enable'} self lynching</button> <button class="button" name="send" value="/mafia ${room.game.enableNL ? 'disable' : 'enable'}nl ${room.id}">${room.game.enableNL ? 'Disable' : 'Enable'} No-Lynch</button> <button class="button" name="send" value="/mafia reveal ${room.id}, ${room.game.noReveal ? 'off' : 'on'}">${room.game.noReveal ? 'Enable' : 'Disable'} revealing of roles</button> <button class="button" name="send" value="/mafia end ${room.id}">End Game</button>`;
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 			buf += `<p>To set a deadline, use <strong>/mafia deadline [minutes]</strong>.<br />To clear the deadline use <strong>/mafia deadline off</strong>.</p><hr/></details></p>`;
 			buf += `<p><details><summary class="button" style="text-align:left; display:inline-block">Player Options</summary>`;
 			buf += `<h3>Player Options</h3>`;
@@ -1220,8 +1200,6 @@ exports.commands = {
 			`/mafia resethammer - sets the hammer to the default, resetting lynches`,
 		],
 
-<<<<<<< HEAD
-=======
 		disablenl: 'enablenl',
 		enablenl: function (target, room, user, connection, cmd) {
 			let targetRoom = room;
@@ -1273,7 +1251,6 @@ exports.commands = {
 			}
 		},
 
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		'!sub': true,
 		sub: function (target, room, user) {
 			let targetRoom = room;
@@ -1494,10 +1471,7 @@ exports.commands = {
 		`/mafia closedsetup [on|off] - Sets if the game is a closed setup. Closed setups don't show the role list to players. Requires host % @ * # & ~`,
 		`/mafia reveal [on|off] - Sets if roles reveal on death or not. Requires host % @ * # & ~`,
 		`/mafia selflynch [on|hammer|off] - Allows players to self lynch themselves either at hammer or anytime. Requires host % @ * # & ~`,
-<<<<<<< HEAD
-=======
 		`/mafia enablenl OR /mafia disablenl - Allows or disallows players abstain from lynching. Requires host % @ # & ~`,
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		`/mafia setroles [comma seperated roles] - Set the roles for a game of mafia. You need to provide one role per player.`,
 		`/mafia forcesetroles [comma seperated roles] - Forcibly set the roles for a game of mafia. No role PM information or alignment will be set.`,
 		`/mafia start - Start the game of mafia. Signups must be closed. Requires host % @ * # & ~`,

@@ -28,11 +28,7 @@ class RandomGen6Teams extends RandomTeams {
 		}
 		let battleForme = this.checkBattleForme(template);
 		if (battleForme && battleForme.tier !== 'AG' && (battleForme.isMega ? !teamDetails.megaStone : this.randomChance(1, 2))) {
-<<<<<<< HEAD
-			template = this.getTemplate(template.otherFormes.length >= 2 ? template.otherFormes[this.random(template.otherFormes.length)] : template.otherFormes[0]);
-=======
 			template = this.getTemplate(template.otherFormes.length >= 2 ? this.sample(template.otherFormes) : template.otherFormes[0]);
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		}
 
 		let movePool = (template.randomBattleMoves ? template.randomBattleMoves.slice() : Object.keys(template.learnset));
@@ -1147,7 +1143,7 @@ class RandomGen6Teams extends RandomTeams {
 				// Cover any major weakness (3+) with at least one resistance
 				if (teamData.resistances[typeName] >= 1) continue;
 				if (resistanceAbilities[abilityData.id] && resistanceAbilities[abilityData.id].includes(typeName) || !this.getImmunity(typeName, types)) {
-					// Heuristic: assume that Pokémon with these abilities don't have (too) negative typing.
+					// Heuristic: assume that Pokï¿½mon with these abilities don't have (too) negative typing.
 					teamData.resistances[typeName] = (teamData.resistances[typeName] || 0) + 1;
 					if (teamData.resistances[typeName] >= 1) teamData.weaknesses[typeName] = 0;
 					continue;

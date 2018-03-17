@@ -32,7 +32,7 @@ exports.commands = {
 			if (!room.chatRoomData) return this.errorReply("This command is unavailable in temporary rooms.");
 			if (!this.can('declare', null, room)) return false;
 			if (!room.events) room.events = Object.create(null);
-			let [eventName, date,  creator, ...desc] = target.split(target.includes('|') ? '|' : ',');
+			let [eventName, date, creator, ...desc] = target.split(target.includes('|') ? '|' : ',');
 
 			if (!(eventName && date && creator && desc)) return this.errorReply("You're missing a command parameter - see /help roomevents for this command's syntax.");
 

@@ -230,8 +230,6 @@ class Battle extends Dex.ModdedDex {
 		return this.prng.randomChance(numerator, denominator);
 	}
 
-<<<<<<< HEAD
-=======
 	/**
 	 * @param {ReadonlyArray<T>} items
 	 * @return {T}
@@ -241,7 +239,6 @@ class Battle extends Dex.ModdedDex {
 		return this.prng.sample(items);
 	}
 
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 	resetRNG() {
 		this.prng = new PRNG(this.prng.startingSeed);
 	}
