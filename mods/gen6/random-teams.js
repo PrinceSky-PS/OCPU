@@ -953,8 +953,6 @@ class RandomGen6Teams extends RandomTeams {
 			item: item,
 			level: level,
 			shiny: this.randomChance(1, 1024),
-<<<<<<< HEAD
-=======
 		};
 	}
 	randomFactorySet(template, slot, teamData, tier) {
@@ -1036,7 +1034,6 @@ class RandomGen6Teams extends RandomTeams {
 			ivs: setData.set.ivs || {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31},
 			nature: setData.set.nature || 'Serious',
 			moves: moves,
->>>>>>> bcf17f9471104e83adc40e27d4792d6c57644d77
 		};
 	}
 	randomFactoryTeam(depth = 0) {
