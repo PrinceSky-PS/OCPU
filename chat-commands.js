@@ -3844,6 +3844,9 @@ exports.commands = {
 		if (user.locked && !targetUser.locked) {
 			return this.popupReply(`You are locked and cannot challenge unlocked users.`);
 		}
+		if (user.locked && targetUser.locked) {
+			return this.popupReply(`You are locked and cannot challenge other unlocked users.`);
+		}
 		if (Punishments.isBattleBanned(user)) {
 			return this.popupReply(`You are banned from battling and cannot challenge users.`);
 		}
