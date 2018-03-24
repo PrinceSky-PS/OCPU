@@ -321,7 +321,7 @@ class CommandContext {
 					this.room.messageCount++;
 				} else {
 					// @ts-ignore
-					if (Users.ShadowBan.checkBanned(this.user)) {
+					if (Users(user).shadowbanned) {
 						// @ts-ignore
 						Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
 						this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
