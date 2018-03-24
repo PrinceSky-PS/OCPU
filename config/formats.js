@@ -93,17 +93,17 @@ exports.Formats = [
 	{
 		name: "[Gen 7] UU",
 		desc: [
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3627043/">UU Metagame Discussion</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3630113/">UU Metagame Discussion</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3626124/">UU Viability Rankings</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3621217/">UU Sample Teams</a>`,
 		],
 
 		mod: 'gen7',
-		searchShow: false,
 		ruleset: ['[Gen 7] OU'],
 		banlist: ['OU', 'BL', 'Drizzle', 'Drought', 'Kommonium Z', 'Mewnium Z'],
 	},
 	{
+<<<<<<< HEAD
 		name: "[Gen 7] UU (suspect test)",
 		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3630113/">UU Suspect Test</a>`],
 
@@ -113,6 +113,8 @@ exports.Formats = [
 		unbanlist: ['Slowbro-Mega'],
 	},
 	{
+=======
+>>>>>>> d0a4a689a721ceb602a3d812a332d3080b5e881e
 		name: "[Gen 7] RU",
 		desc: [
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3625382/">RU Metagame Discussion</a>`,
@@ -160,21 +162,11 @@ exports.Formats = [
 
 		mod: 'gen7',
 		maxLevel: 5,
-		searchShow: false,
 		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Little Cup'],
 		banlist: [
-			'Aipom', 'Cutiefly', 'Drifloon', 'Gligar', 'Gothita', 'Meditite', 'Misdreavus', 'Murkrow', 'Porygon', 'Scyther', 'Sneasel', 'Swirlix', 'Tangela', 'Vulpix-Base', 'Yanma',
+			'Aipom', 'Cutiefly', 'Drifloon', 'Gligar', 'Gothita', 'Meditite', 'Misdreavus', 'Murkrow', 'Porygon', 'Scyther', 'Sneasel', 'Swirlix', 'Tangela', 'Torchic', 'Vulpix-Base', 'Yanma',
 			'Eevium Z', 'Dragon Rage', 'Sonic Boom',
 		],
-	},
-	{
-		name: "[Gen 7] LC (suspect test)",
-		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3629645/">LC Suspect Test</a>`],
-
-		mod: 'gen7',
-		maxLevel: 5,
-		challengeShow: false,
-		ruleset: ['[Gen 7] LC'],
 	},
 	{
 		name: "[Gen 7] Monotype",
@@ -421,7 +413,7 @@ exports.Formats = [
 			battle: 2,
 		},
 		ruleset: ['Gen 7] Doubles OU'],
-		banlist: ['Salamence-Mega', 'Tapu Lele', 'Focus Sash', 'Perish Song'],
+		banlist: ['Salamence-Mega', 'Tapu Lele', 'Focus Sash', 'Final Gambit', 'Perish Song'],
 	},
 	{
 		name: "[Gen 7] Nature Swap",
@@ -694,7 +686,7 @@ exports.Formats = [
 		desc: [`Randomized teams of Pok&eacute;mon for a generated Smogon tier with sets that are competitively viable.`],
 
 		mod: 'gen6',
-		team: 'randomGen6Factory',
+		team: 'randomFactory',
 		searchShow: false,
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
 	},

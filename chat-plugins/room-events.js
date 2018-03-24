@@ -27,6 +27,8 @@ exports.commands = {
 			buff += '</table>';
 			return this.sendReply(`|raw|<div class="infobox-limited">${buff}</div>`);
 		},
+		new: 'add',
+		create: 'add',
 		edit: 'add',
 		add: function (target, room, user) {
 			if (!room.chatRoomData) return this.errorReply("This command is unavailable in temporary rooms.");
@@ -70,6 +72,7 @@ exports.commands = {
 			room.chatRoomData.events = room.events;
 			Rooms.global.writeChatRoomData();
 		},
+		delete: 'remove',
 		remove: function (target, room, user) {
 			if (!room.chatRoomData) return this.errorReply("This command is unavailable in temporary rooms.");
 			if (!this.can('declare', null, room)) return false;
@@ -106,7 +109,12 @@ exports.commands = {
 	},
 	roomeventshelp: [
 		`/roomevents - Displays a list of upcoming room-specific events.`,
+<<<<<<< HEAD
 		`/roomevents add [event name] | [event date/time] | [event description] | [event creator] - Adds a room event. Requires: # & ~`,
+=======
+		`/roomevents add [event name] | [event date/time] | [event description] - Adds a room event. Requires: # & ~`,
+		`/roomevents edit [event name] | [event date/time] | [event description] - Edits the details of an event. Requires: # & ~`,
+>>>>>>> d0a4a689a721ceb602a3d812a332d3080b5e881e
 		`/roomevents remove [event name] - Deletes an event. Requires: # & ~`,
 		`/roomevents view [event name] - Displays information about a specific event.`,
 	],
