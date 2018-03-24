@@ -142,7 +142,7 @@ let removeUser = exports.removeUser = function (user) {
 };
 
 exports.addMessage = function (user, tag, message) {
-	room.add('|c|' + user.getIdentity() + '|__(' + tag + ')__ ' + message);
+	room.add(`|c|${user.getIdentity()}` + '|__(' + tag + ')__ ' + message);
 	room.update();
 };
 
