@@ -434,7 +434,7 @@ exports.grouplist = [
 	{
 		symbol: '\u2605',
 		id: "host",
-		name: "Event Host",
+		name: "Host",
 		inherit: '@',
 		jurisdiction: 'u',
 		roommod: true,
