@@ -20,9 +20,9 @@ exports.commands = {
 			}
 			if (!this.runBroadcast()) return;
 			let buff = '<table border="1" cellspacing="0" cellpadding="3">';
-			buff += '<th>Event Name:</th><th>Event Description:</th><th>Event Date:</th>';
+			buff += '<th>Event Name:</th><th>Event Description:</th><th>Event Date:</th><th>Event Creator</th>';
 			for (let i in room.events) {
-				buff += `<tr><td>${Chat.escapeHTML(room.events[i].eventName)}</td><td>${Chat.formatText(room.events[i].desc, true)}</td><td><time>${Chat.escapeHTML(room.events[i].date)}</time></td></tr>`;
+				buff += `<tr><td>${Chat.escapeHTML(room.events[i].eventName)}</td><td>${Chat.formatText(room.events[i].desc, true)}</td><td><time>${Chat.escapeHTML(room.events[i].date)}</time></td><td>${Chat.escapeHTML(room.events[i].creator)}</td></tr>`;
 			}
 			buff += '</table>';
 			return this.sendReply(`|raw|<div class="infobox-limited">${buff}</div>`);
@@ -63,8 +63,8 @@ exports.commands = {
 			room.events[eventId] = {
 				eventName: eventName,
 				date: date,
-				desc: desc,
 				creator: creator,
+				desc: desc,
 			};
 			this.privateModAction(`(${user.name} ${this.cmd}ed ${this.cmd === 'add' ? 'a' : 'the'} roomevent titled "${eventName}".)`);
 			this.modlog('ROOMEVENT', null, `${this.cmd}ed "${eventName}"`);
