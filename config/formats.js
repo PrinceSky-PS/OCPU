@@ -103,18 +103,7 @@ exports.Formats = [
 		banlist: ['OU', 'BL', 'Drizzle', 'Drought', 'Kommonium Z', 'Mewnium Z'],
 	},
 	{
-<<<<<<< HEAD
-		name: "[Gen 7] UU (suspect test)",
-		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3630113/">UU Suspect Test</a>`],
 
-		mod: 'gen7',
-
-		ruleset: ['[Gen 7] UU'],
-		unbanlist: ['Slowbro-Mega'],
-	},
-	{
-=======
->>>>>>> d0a4a689a721ceb602a3d812a332d3080b5e881e
 		name: "[Gen 7] RU",
 		desc: [
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3625382/">RU Metagame Discussion</a>`,

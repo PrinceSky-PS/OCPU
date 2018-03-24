@@ -1097,11 +1097,7 @@ class RandomGen6Teams extends RandomTeams {
 				// Cover any major weakness (3+) with at least one resistance
 				if (teamData.resistances[typeName] >= 1) continue;
 				if (resistanceAbilities[abilityData.id] && resistanceAbilities[abilityData.id].includes(typeName) || !this.getImmunity(typeName, types)) {
-<<<<<<< HEAD
-					// Heuristic: assume that Pok�mon with these abilities don't have (too) negative typing.
-=======
 					// Heuristic: assume that Pokemon with these abilities don't have (too) negative typing.
->>>>>>> d0a4a689a721ceb602a3d812a332d3080b5e881e
 					teamData.resistances[typeName] = (teamData.resistances[typeName] || 0) + 1;
 					if (teamData.resistances[typeName] >= 1) teamData.weaknesses[typeName] = 0;
 					continue;

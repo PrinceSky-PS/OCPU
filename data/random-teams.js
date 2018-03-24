@@ -2769,9 +2769,6 @@ class RandomTeams extends Dex.ModdedDex {
 
 		return pokemon;
 	}
-<<<<<<< HEAD
-
-=======
 	randomGen6FactorySet(template, slot, teamData, tier) {
 		let speciesId = toId(template.species);
 		// let flags = this.randomGen6FactorySets[tier][speciesId].flags;
@@ -2983,7 +2980,6 @@ class RandomTeams extends Dex.ModdedDex {
 
 		return pokemon;
 	}
->>>>>>> d0a4a689a721ceb602a3d812a332d3080b5e881e
 	randomBSSFactorySet(template, slot, teamData, tier) {
 		let speciesId = toId(template.species);
 		// let flags = this.randomBSSFactorySets[tier][speciesId].flags;
