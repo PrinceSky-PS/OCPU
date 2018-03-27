@@ -281,7 +281,7 @@ exports.BattlePokedex = {
 	silvally: {
 		inherit: true,
 		types: ['Flying'],
-		baseStats: {hp: 76, atk: 95, def: 163, spa: 123, spd: 194, spd: 9}, // Best: 660
+		baseStats: {hp: 76, atk: 95, def: 163, spa: 123, spd: 194, spe: 9}, // Best: 660
 	},
 	tapukoko: {
 		inherit: true,
