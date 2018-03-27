@@ -1175,6 +1175,7 @@ Chat.sendPM = function (message, user, pmTarget, onlyRecipient = null) {
 	user.send(buf);
 	// @ts-ignore
 	if (Users(this.user).shadowbanned) {
+		// @ts-ignore
 		Users.ShadowBan.addMessage(this.user, `Private to  ${pmTarget.getIdentity()}`, message);
 	} else if (pmTarget !== user) {
 		pmTarget.send(buf);
