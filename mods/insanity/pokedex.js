@@ -317,4 +317,16 @@ exports.BattlePokedex = {
 		inherit: true,
 		types: ['Electric', 'Bug'],
 	},
+	magearna: {
+		inherit: true,
+		types: ['Dark', 'Ghost'],
+	},
+	marshadow: {
+		inherit: true,
+		types: ['Ice', 'Poison'],
+	},
+	zeraora: {
+		inherit: true,
+		types: ['Normal', 'Bug'],
+	},
 };
