@@ -296,7 +296,7 @@ class CommandContext {
 				let emoticons = OCPU.parseEmoticons(message);
 				if (emoticons && !this.room.disableEmoticons) {
 					// @ts-ignore
-					if (Users(user).shadowbanned) {
+					if (Users(this.user).shadowbanned) {
 						// @ts-ignore
 						Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
 						// @ts-ignore
@@ -321,7 +321,7 @@ class CommandContext {
 					this.room.messageCount++;
 				} else {
 					// @ts-ignore
-					if (Users(user).shadowbanned) {
+					if (Users(this.user).shadowbanned) {
 						// @ts-ignore
 						Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
 						this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
@@ -1173,7 +1173,9 @@ Chat.sendPM = function (message, user, pmTarget, onlyRecipient = null) {
 	let buf = `|pm|${user.getIdentity()}|${pmTarget.getIdentity()}|${message}`;
 	if (onlyRecipient) return onlyRecipient.send(buf);
 	user.send(buf);
-	if (Users(user).shadowbanned) {
+	// @ts-ignore
+	if (Users(this.user).shadowbanned) {
+		// @ts-ignore
 		Users.ShadowBan.addMessage(this.user, `Private to  ${pmTarget.getIdentity()}`, message);
 	} else if (pmTarget !== user) {
 		pmTarget.send(buf);

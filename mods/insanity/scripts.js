@@ -72,5 +72,8 @@ exports.BattleScripts = {
 		this.modData('Pokedex', 'solgaleo').types = ['Ghost', 'Fairy'];
 		this.modData('Pokedex', 'lunala').types = ['Bug', 'Flying'];
 		this.modData('Pokedex', 'necrozma').types = ['Electric', 'Steel'];
+		this.modData('Pokedex', 'magearna').types = ['Dark', 'Ghost'];
+		this.modData('Pokedex', 'marshadow').types = ['Ice', 'Poison'];
+		this.modData('Pokedex', 'zeraora').types = ['Normal', 'Bug'];
 	},
 };
