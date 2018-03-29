@@ -311,9 +311,9 @@ class CommandContext {
 					}
 					curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
 				}
-					this.room.log.log.push((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-					this.room.lastUpdate = this.room.log.length;
-					this.room.messageCount++;
+				this.room.log.log.push((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+				this.room.lastUpdate = this.room.log.length;
+				this.room.messageCount++;
 				//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 			}
 		}
