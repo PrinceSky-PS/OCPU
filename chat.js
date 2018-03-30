@@ -296,40 +296,25 @@ class CommandContext {
 				let emoticons = OCPU.parseEmoticons(message);
 				if (emoticons && !this.room.disableEmoticons) {
 					// @ts-ignore
-					if (Users(this.user).shadowbanned) {
-						// @ts-ignore
-						Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
-						// @ts-ignore
-						if (!OCPU.ignoreEmotes[this.user.userid]) this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
-						// @ts-ignore
-						if (OCPU.ignoreEmotes[this.user.userid]) this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-						this.room.update();
-						return false;
-					}
-					for (let u in this.room.users) {
-						let curUser = Users(u);
-						if (!curUser || !curUser.connected) continue;
-						// @ts-ignore
-						if (OCPU.ignoreEmotes[curUser.userid]) {
-							curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-							continue;
-						}
-						curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
-					}
-					this.room.log.log.push((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-					this.room.lastUpdate = this.room.log.length;
-					this.room.messageCount++;
-				} else {
+					if (!OCPU.ignoreEmotes[this.user.userid]) this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
 					// @ts-ignore
-					if (Users(this.user).shadowbanned) {
-						// @ts-ignore
-						Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
-						this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-					} else {
-						this.room.add((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-						this.room.messageCount++;
-					}
+					if (OCPU.ignoreEmotes[this.user.userid]) this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+					this.room.update();
+					return false;
 				}
+				for (let u in this.room.users) {
+					let curUser = Users(u);
+					if (!curUser || !curUser.connected) continue;
+					// @ts-ignore
+					if (OCPU.ignoreEmotes[curUser.userid]) {
+						curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+						continue;
+					}
+					curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
+				}
+				this.room.log.log.push((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+				this.room.lastUpdate = this.room.log.length;
+				this.room.messageCount++;
 				//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 			}
 		}
@@ -1173,11 +1158,7 @@ Chat.sendPM = function (message, user, pmTarget, onlyRecipient = null) {
 	let buf = `|pm|${user.getIdentity()}|${pmTarget.getIdentity()}|${message}`;
 	if (onlyRecipient) return onlyRecipient.send(buf);
 	user.send(buf);
-	// @ts-ignore
-	if (Users(this.user).shadowbanned) {
-		// @ts-ignore
-		Users.ShadowBan.addMessage(this.user, `Private to  ${pmTarget.getIdentity()}`, message);
-	} else if (pmTarget !== user) {
+	if (pmTarget !== user) {
 		pmTarget.send(buf);
 	}
 	pmTarget.lastPM = user.userid;
