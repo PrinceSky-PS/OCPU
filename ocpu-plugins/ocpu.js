@@ -442,7 +442,7 @@ exports.commands = {
 		if (target) return this.errorReply("This command cannot be used with a 'target'.");
 
 		OCPU.pmStaff("A system operator needs all users who can see this message in the staff room ASAP for an emergency meeting. Issuing user: " + user.name + ".");
-		if (user.name === "Jolt(S Jolteon)") {
+		if (user.userid === "joltsjolteon") {
 			OCPU.pmStaff("Jolt(S Jolteon) is the console user and does not need any confirmation if he is a sysop.");
 		} else {
 			OCPU.pmStaff("Please use '/profile " + user.name + "' to see if that user is a confirmed sysop. Please alert an actual sysop if they are not.");
