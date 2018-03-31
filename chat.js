@@ -292,30 +292,7 @@ class CommandContext {
 			if (this.pmTarget) {
 				Chat.sendPM(message, this.user, this.pmTarget);
 			} else {
-				// @ts-ignore
-				let emoticons = OCPU.parseEmoticons(message);
-				if (emoticons && !this.room.disableEmoticons) {
-					// @ts-ignore
-					if (!OCPU.ignoreEmotes[this.user.userid]) this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
-					// @ts-ignore
-					if (OCPU.ignoreEmotes[this.user.userid]) this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-					this.room.update();
-					return false;
-				}
-				for (let u in this.room.users) {
-					let curUser = Users(u);
-					if (!curUser || !curUser.connected) continue;
-					// @ts-ignore
-					if (OCPU.ignoreEmotes[curUser.userid]) {
-						curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-						continue;
-					}
-					curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
-				}
-				this.room.log.log.push((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-				this.room.lastUpdate = this.room.log.length;
-				this.room.messageCount++;
-				//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
+				this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 			}
 		}
 
@@ -1158,9 +1135,7 @@ Chat.sendPM = function (message, user, pmTarget, onlyRecipient = null) {
 	let buf = `|pm|${user.getIdentity()}|${pmTarget.getIdentity()}|${message}`;
 	if (onlyRecipient) return onlyRecipient.send(buf);
 	user.send(buf);
-	if (pmTarget !== user) {
-		pmTarget.send(buf);
-	}
+	if (pmTarget !== user) pmTarget.send(buf);
 	pmTarget.lastPM = user.userid;
 	user.lastPM = pmTarget.userid;
 };
@@ -1246,19 +1221,6 @@ Chat.loadPlugins = function () {
 		if (plugin.namefilter) Chat.namefilters.push(plugin.namefilter);
 		if (plugin.hostfilter) Chat.hostfilters.push(plugin.hostfilter);
 		if (plugin.loginfilter) Chat.loginfilters.push(plugin.loginfilter);
-	}
-
-	let customfiles = FS('ocpu-plugins/').readdirSync();
-
-	for (const customfile of customfiles) {
-		if (customfile.substr(-3) !== '.js') continue;
-		const ocpuplugin = require(`./ocpu-plugins/${customfile}`);
-
-		Object.assign(commands, ocpuplugin.commands);
-
-		if (ocpuplugin.chatfilter) Chat.filters.push(ocpuplugin.chatfilter);
-		if (ocpuplugin.namefilter) Chat.namefilters.push(ocpuplugin.namefilter);
-		if (ocpuplugin.hostfilter) Chat.hostfilters.push(ocpuplugin.hostfilter);
 	}
 };
 
