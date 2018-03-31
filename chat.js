@@ -1222,6 +1222,20 @@ Chat.loadPlugins = function () {
 		if (plugin.hostfilter) Chat.hostfilters.push(plugin.hostfilter);
 		if (plugin.loginfilter) Chat.loginfilters.push(plugin.loginfilter);
 	}
+
+	// Add Custom-plugin support from the ocpu-plugins folder
+	let customfiles = FS('ocpu-plugins/').readdirSync();
+
+	for (const customfile of customfiles) {
+		if (customfile.substr(-3) !== '.js') continue;
+		const ocpuplugin = require(`./ocpu-plugins/${customfile}`);
+
+		Object.assign(commands, ocpuplugin.commands);
+
+		if (ocpuplugin.chatfilter) Chat.filters.push(ocpuplugin.chatfilter);
+		if (ocpuplugin.namefilter) Chat.namefilters.push(ocpuplugin.namefilter);
+		if (ocpuplugin.hostfilter) Chat.hostfilters.push(ocpuplugin.hostfilter);
+	}
 };
 
 /**
