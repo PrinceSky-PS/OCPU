@@ -427,18 +427,13 @@ class GlobalRoom extends BasicRoom {
 		 * @type {string[]}
 		 */
 		this.staffAutojoinList = [];
-<<<<<<< HEAD
 		/**
 		 * Rooms that upperstaff autojoin upon connecting
 		 * @type {string[]}
 		 */
 		this.upperStaffAutojoinList = [];
-		for (let i = 0; i < this.chatRoomDataList.length; i++) {
-			if (!this.chatRoomDataList[i] || !this.chatRoomDataList[i].title) {
-=======
 		for (const [i, chatRoomData] of this.chatRoomDataList.entries()) {
 			if (!chatRoomData || !chatRoomData.title) {
->>>>>>> 1e4285cbafd3be2b2bd6fbbfa91851aa4718ce3e
 				Monitor.warn(`ERROR: Room number ${i} has no data and could not be loaded.`);
 				continue;
 			}

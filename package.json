@@ -66,12 +66,7 @@
     "@types/node": "^9.4.6",
     "@types/nodemailer": "^4.3.0",
     "eslint": "^4.16.0",
-<<<<<<< HEAD
-    "mocha": "^5.0.2",
-    "typescript": "^2.6.1"
-=======
     "mocha": "^4.0.1",
     "typescript": "^2.7.2"
->>>>>>> 1e4285cbafd3be2b2bd6fbbfa91851aa4718ce3e
   }
 }
