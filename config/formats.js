@@ -13,17 +13,15 @@ let Formats = [
 	},
 	{
 		name: "[Gen 7] Insanity",
-		desc: [
-			`Custom teams made by people with all legendaries/mythicals typing and base stats changed.`,
-		],
+		desc: `Custom teams made by people with all legendaries/mythicals typing and base stats changed.`,
 
 		mod: 'insanity',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Cancel Mod'],
 	},
 	/*{
 		name: "[Gen 7] Random Monotype",
-		desc: [
-			`All the Pok&eacute;mon on a team must share a type.`,
+		desc: `All the Pok&eacute;mon on a team must share a type.`,
+		threads: [
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3621036/">Monotype Metagame Discussion</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3622349">Monotype Viability Rankings</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3599682/">Monotype Sample Teams</a>`,
