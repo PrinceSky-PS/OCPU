@@ -492,6 +492,7 @@ exports.BattleMovedex = {
 			},
 		},
 	},
+<<<<<<< HEAD
 	trumpcard: {
 		inherit: true,
 		basePowerCallback: function (pokemon) {
@@ -510,6 +511,8 @@ exports.BattleMovedex = {
 			}
 		},
 	},
+=======
+>>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 
 	/**
 	 * Moves that check `pokemon.moveThisTurn`

@@ -1,6 +1,7 @@
 'use strict';
 
-exports.BattleScripts = {
+/**@type {ModdedBattleScriptsData} */
+let BattleScripts = {
 	inherit: 'gen4',
 	gen: 3,
 	init: function () {
@@ -52,13 +53,21 @@ exports.BattleScripts = {
 			move.ignoreImmunity = (move.category === 'Status');
 		}
 
+<<<<<<< HEAD
 		if (move.ignoreImmunity !== true && !move.ignoreImmunity[move.type] && !target.runImmunity(move.type)) {
+=======
+		if ((!move.ignoreImmunity || (move.ignoreImmunity !== true && !move.ignoreImmunity[move.type])) && !target.runImmunity(move.type)) {
+>>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 			naturalImmunity = true;
 		}
 
 		let boostTable = [1, 4 / 3, 5 / 3, 2, 7 / 3, 8 / 3, 3];
 
 		// calculate true accuracy
+<<<<<<< HEAD
+=======
+		/**@type {number | true} */
+>>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 		let accuracy = move.accuracy;
 		let boosts, boost;
 		if (accuracy !== true) {
@@ -123,11 +132,19 @@ exports.BattleScripts = {
 		}
 
 		move.totalDamage = 0;
+<<<<<<< HEAD
+=======
+		/**@type {number | false} */
+>>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 		let damage = 0;
 		pokemon.lastDamage = 0;
 		if (move.multihit) {
 			let hits = move.multihit;
+<<<<<<< HEAD
 			if (hits.length) {
+=======
+			if (Array.isArray(hits)) {
+>>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 				// yes, it's hardcoded... meh
 				if (hits[0] === 2 && hits[1] === 5) {
 					hits = this.sample([2, 2, 2, 3, 3, 3, 4, 5]);
@@ -137,6 +154,10 @@ exports.BattleScripts = {
 			}
 			hits = Math.floor(hits);
 			let nullDamage = true;
+<<<<<<< HEAD
+=======
+			/**@type {number | false} */
+>>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 			let moveDamage;
 			// There is no need to recursively check the ´sleepUsable´ flag as Sleep Talk can only be used while asleep.
 			let isSleepUsable = move.sleepUsable || this.getMove(move.sourceEffect).sleepUsable;
@@ -211,6 +232,9 @@ exports.BattleScripts = {
 	},
 
 	calcRecoilDamage: function (damageDealt, move) {
+		// @ts-ignore
 		return this.clampIntRange(Math.floor(damageDealt * move.recoil[0] / move.recoil[1]), 1);
 	},
 };
+
+exports.BattleScripts = BattleScripts;
