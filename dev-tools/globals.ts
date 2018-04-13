@@ -505,10 +505,7 @@ interface Move extends Effect, MoveData {
 	aerilateBoosted?: boolean
 	allies?: Pokemon[]
 	auraBooster?: Pokemon
-<<<<<<< HEAD
-=======
 	causedCrashDamage?: boolean
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 	crit?: boolean
 	forceStatus?: string
 	galvanizeBoosted?: boolean

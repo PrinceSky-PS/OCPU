@@ -103,11 +103,7 @@ let BattleStatuses = {
 			return false;
 		},
 		onAfterMoveSecondary: function (target, source, move) {
-<<<<<<< HEAD
-			if (move.secondary && move.secondary.status === 'brn') {
-=======
 			if (move.secondary && move.secondary !== true && move.secondary.status === 'brn') {
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 				target.cureStatus();
 			}
 		},

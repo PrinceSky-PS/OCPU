@@ -495,11 +495,7 @@ let Formats = [
 
 		mod: 'gen7',
 		ruleset: ['[Gen 7] Ubers'],
-<<<<<<< HEAD
-		banlist: ['Eevium Z', 'Eviolite', 'Deep Sea Tooth', 'Light Ball'],
-=======
 		banlist: ['Gengar-Mega', 'Shadow Tag', 'Eevium Z', 'Eviolite', 'Deep Sea Tooth', 'Light Ball'],
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 		onModifyTemplate: function (template, target, source) {
 			if (source) return;
 			if (Object.values(template.baseStats).reduce((x, y) => x + y) > 350) return;
@@ -738,11 +734,7 @@ let Formats = [
 		name: "[Gen 7] 2v2 Doubles",
 		desc: `Double battle where you bring four Pok&eacute;mon to Team Preview and choose only two.`,
 		threads: [
-<<<<<<< HEAD
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3606989/">2v2 Doubles</a>`,
-=======
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3606989/">2v2 Doubles</a>`,
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 		],
 
 		mod: 'gen7',
@@ -911,11 +903,7 @@ let Formats = [
 	},
 	{
 		name: "[Gen 3] 1v1",
-<<<<<<< HEAD
-		threads: [`&bullet; <a href="http://www.smogon.com/forums/posts/7535732/">ADV 1v1</a>`],
-=======
 		threads: [`&bullet; <a href="https://www.smogon.com/forums/posts/7535732/">ADV 1v1</a>`],
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 
 		mod: 'gen3',
 		teamLength: {
@@ -928,13 +916,8 @@ let Formats = [
 	{
 		name: "[Gen 5] UU",
 		threads: [
-<<<<<<< HEAD
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3474024/">BW2 UU Viability Ranking</a>`,
-			`&bullet; <a href="http://www.smogon.com/forums/posts/6431094/">BW2 Sample Teams</a>`,
-=======
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3474024/">BW2 UU Viability Ranking</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/posts/6431094/">BW2 Sample Teams</a>`,
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 		],
 
 		mod: 'gen5',
@@ -1442,13 +1425,8 @@ let Formats = [
 	{
 		name: "[Gen 4] UU",
 		threads: [
-<<<<<<< HEAD
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3532624/">DPP UU Metagame Discussion</a>`,
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3503638/">DPP UU Viability Ranking</a>`,
-=======
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3532624/">DPP UU Metagame Discussion</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3503638/">DPP UU Viability Ranking</a>`,
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 		],
 
 		mod: 'gen4',

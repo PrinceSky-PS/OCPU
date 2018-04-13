@@ -1522,15 +1522,9 @@ class RandomTeams extends Dex.ModdedDex {
 
 		if (template.species === 'Stunfisk') {
 			// This is just to amuse Zarel
-<<<<<<< HEAD
-			item = 'Cheri Berry';
-			ability = 'Limber';
-			level = 87;
-=======
 			ability = 'Limber';
 			item = 'Cheri Berry';
 			level = 85;
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 		}
 
 		// Prepare optimal HP

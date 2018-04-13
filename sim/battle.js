@@ -3407,13 +3407,8 @@ class Battle extends Dex.ModdedDex {
 	/**
 	 * @param {?Pokemon} target
 	 * @param {Pokemon} pokemon
-<<<<<<< HEAD
-	 * @param {Move} move
-	 * @param {MoveData} [moveData]
-=======
 	 * @param {string | Move} move
 	 * @param {Move} [moveData]
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
 	 * @param {boolean} [isSecondary]
 	 * @param {boolean} [isSelf]
 	 * @return {number | false}

@@ -492,27 +492,7 @@ exports.BattleMovedex = {
 			},
 		},
 	},
-<<<<<<< HEAD
-	trumpcard: {
-		inherit: true,
-		basePowerCallback: function (pokemon) {
-			let move = pokemon.getMoveData(pokemon.getLastMoveAbsolute()); // Account for calling Trump Card via other moves
-			switch (move.pp) {
-			case 0:
-				return 200;
-			case 1:
-				return 80;
-			case 2:
-				return 60;
-			case 3:
-				return 50;
-			default:
-				return 40;
-			}
-		},
-	},
-=======
->>>>>>> 61076ec11f46c1abc19c31a78135bc434153e62c
+
 
 	/**
 	 * Moves that check `pokemon.moveThisTurn`
