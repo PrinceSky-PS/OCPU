@@ -51,6 +51,9 @@ exports.commands = {
 		if (!targetUser.registered) {
 			buf += `<br />(Unregistered)`;
 		}
+		if (targetUser.hasConsoleAccess(connection)) {
+			buf += `<br/>(Server System Operator)`;
+		}
 		let publicrooms = "";
 		let hiddenrooms = "";
 		let privaterooms = "";
