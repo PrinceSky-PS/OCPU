@@ -885,6 +885,7 @@ exports.commands = {
 		    "- " + OCPU.nameColor('AlfaStorm', true) + " (Sysop, Technical Admin, Development)<br />" +
 		    "<br />" +
 			 "<u>Contributors</u><br />" +
+			 "- " + OCPU.nameColor('SalemTheShadow', true) + " (Technical Captain, Development)<br />" +
 			 "- " + OCPU.nameColor('Glameowch', true) + " (Events Lead)<br />" +
 			 "<br />" +
 		    "<u>Development:</u><br />" +
