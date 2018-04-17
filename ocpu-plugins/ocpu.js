@@ -429,34 +429,6 @@ exports.commands = {
 		room.mute(targetUser, muteDuration, false);
 	},
 
-	em: 'emergencymeeting',
-	emergencymeeting: function (target, room, user, connection) {
-		if (!user.hasConsoleAccess(connection)) {
-			return this.errorReply("/emergencymeeting - access denied.");
-		}
-
-		if (user.name === false) {
-			return this.errorReply("You have been denied access to this command.");
-		}
-
-		if (target) return this.errorReply("This command cannot be used with a 'target'.");
-
-		OCPU.pmStaff("A system operator needs all users who can see this message in the staff room ASAP for an emergency meeting. Issuing user: " + user.name + ".");
-		if (user.userid === "joltsjolteon") {
-			OCPU.pmStaff("Jolt(S Jolteon) is the console user and does not need any confirmation if he is a sysop.");
-		} else {
-			OCPU.pmStaff("Please use '/profile " + user.name + "' to see if that user is a confirmed sysop. Please alert an actual sysop if they are not.");
-		}
-
-		Rooms.rooms.get("staff").addRaw("<div class=\"broadcast-red\">The sysop user " + user.name + " (at least what the server reconizes as a sysop user) is calling an emergency meeting. Please listen to what he/she needs to say.</div>");
-		Rooms.rooms.get("staff").modchat = '~';
-		Rooms.rooms.get("staff").addRaw("<div class=\"broadcast-red\">Moderated chat has been set to '~' for this. Other admins and sysops, please refrain from saying anything. except for the sysop/admin keeping track of the timer.</div>");
-		Rooms.rooms.get("staff").addRaw("<div class=\"broadcast-blue\">This user's timer will start after another sysop/admin has said so, and that sysop/admin is responsible for keeping track of the timer. Once the timer is up, that sysop/admin will declare that this is over and will remove the modchat. The user who started this may end it at any time OR by a council vote of most sysop/admins (55% rule). The timer is 10 minutes");
-
-		Rooms.rooms.get("upperstaff").addRaw("<div class=\"broadcast-blue\">Please get inside the Staff room if you are not already there please.");
-
-		user.popup("You must have something significant to say to all staff members or it will immediately end.");
-	},
 	protectroom: function (target, room, user) {
 		if (!this.can('pban')) return false;
 		if (room.type !== 'chat' || room.isOfficial) return this.errorReply("This room does not need to be protected.");
@@ -1004,54 +976,6 @@ exports.commands = {
 		});
 	},
 
-	'!facebook': true,
-	fb: 'fb',
-	facebook: function (target, room, user) {
-		if (!this.runBroadcast()) return;
-		this.sendReplyBox('\'s Facebook page can be found <a href="https://www.facebook.com/pages/-Showdown/585196564960185">here</a>.');
-	},
-
-	'!dubtrack': true,
-	dub: 'dubtrack',
-	music: 'dubtrack',
-	radio: 'dubtrack',
-	dubtrackfm: 'dubtrack',
-	dubtrack: function (target, room, user) {
-		if (!this.runBroadcast()) return;
-		let nowPlaying = "";
-		let options = {
-			host: 'api.dubtrack.fm',
-			port: 443,
-			path: '/room/lobby',
-			method: 'GET',
-		};
-		https.get(options, res => {
-			let data = '';
-			res.on('data', chunk => {
-				data += chunk;
-			}).on('end', () => {
-				if (data.charAt(0) === '{') {
-					data = JSON.parse(data);
-					if (data['data'] && data['data']['currentSong']) nowPlaying = "<br /><strong>Now Playing:</strong> " + Chat.escapeHTML(data['data']['currentSong'].name);
-				}
-				this.sendReplyBox('Join our dubtrack.fm room <a href="https://www.dubtrack.fm/join/ocpu_150896577063595">here!</a>' + nowPlaying);
-				room.update();
-			});
-		});
-	},
-
-	declareaotd: function (target, room, user) {
-		if (room.id !== 'lobby') return this.sendReply("The command must be used in Lobby.");
-		if (!user.can('broadcast', null, room)) return this.sendReply('You do not have enough authority to use this command.');
-		if (!this.canTalk()) return false;
-		this.add(
-			'|raw|<div class="broadcast-blue"><strong>AOTD has begun in enrodRadioTower! ' +
-			'<button name="joinRoom" value="enrodradiotower" target="_blank">Join now</button> to nominate your favorite artist for AOTD to be featured on the ' +
-			'official page next to your name for a chance to win the monthly prize at the end of the month!</strong></div>'
-		);
-		this.addModAction(user.name + " used declareaotd.");
-	},
-
 	hideconsoleuser: function (target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {
 			return this.errorReply("/hideconsoleuser - Access denied.");
@@ -1213,82 +1137,6 @@ exports.commands = {
 		Config.poofOff = false;
 		return this.sendReply("Poof is now enabled.");
 	},
-
-	advertise: 'advertisement',
-	advertisement: function (target, room, user, connection) {
-		if (room.id !== 'lobby') return this.errorReply("This command can only be used in the Lobby.");
-		if (Economy.readMoneySync(user.userid) < ADVERTISEMENT_COST) return this.errorReply("You do not have enough bucks to buy an advertisement, they cost " + ADVERTISEMENT_COST + "  buck" + pluralFormat(ADVERTISEMENT_COST, 's') + ".");
-		if (target.length > 600) return this.errorReply("This advertisement is too long.");
-		target = target.split('|');
-		let targetRoom = (Rooms.search(target[0]) ? target[0] : false);
-		if (!room || !target || !target[1]) return this.parse('/help advertise');
-		if (!targetRoom) return this.errorReply("Room '" + toId(target[0]) + "' not found.  Check spelling?");
-		if (user.lastAdvertisement) {
-			let milliseconds = (Date.now() - user.lastAdvertisement);
-			let seconds = ((milliseconds / 1000) % 60);
-			let remainingTime = Math.round(seconds - (15 * 60));
-			if (((Date.now() - user.lastAdvertisement) <= 15 * 60 * 1000)) return this.errorReply("You must wait " + (remainingTime - remainingTime * 2) + " seconds before submitting another advertisement.");
-		}
-		let advertisement = (Config.chatfilter ? Config.chatfilter(Chat.escapeHTML(target[1]), user, room, connection) : Chat.escapeHTML(target[1]));
-		if (user.lastCommand !== 'advertise') {
-			this.sendReply("WARNING: this command will cost you " + ADVERTISEMENT_COST + "  buck" + pluralFormat(ADVERTISEMENT_COST, 's') + " to use.");
-			this.sendReply("To continue, use this command again.");
-			user.lastCommand = 'advertise';
-		} else if (user.lastCommand === 'advertise') {
-			let buttoncss = 'background: #ff9900; text-shadow: none; padding: 2px 6px; color: black; text-align: center; border: black, solid, 1px;';
-			Rooms('lobby').add('|raw|<div class="infobox"><strong style="color: green;">Advertisement:</strong> ' + advertisement + '<br /><hr width="80%"><button name="joinRoom" class="button" style="' + buttoncss + '" value="' + toId(targetRoom) + '">Click to join <strong>' + Rooms.search(toId(targetRoom)).title + '</strong></button> | <i><font color="gray">(Advertised by</font> ' + OCPU.nameColor(user.name) + '<font color="gray">)</font></i></div>').update();
-			Economy.writeMoney(user.userid, -ADVERTISEMENT_COST);
-			user.lastCommand = '';
-			user.lastAdvertisement = Date.now();
-		}
-	},
-	advertisehelp: ['Usage: /advertise [room] | [advertisement] - Be sure to have | seperating the room and the actual advertisement.'],
-
-	// Animal command by Kyvn and DNS
-	animal: 'animals',
-	animals: function (target, room, user) {
-		if (!this.runBroadcast()) return;
-		if (!target) return this.parse('/help animals');
-		let tarId = toId(target);
-		let validTargets = ['cat', 'otter', 'dog', 'bunny', 'pokemon', 'kitten', 'puppy'];
-		if (room.id === 'lobby') return this.errorReply("This command cannot be broadcasted in the Lobby.");
-		if (!validTargets.includes(tarId)) return this.parse('/help animals');
-		let reqOpts = {
-			hostname: 'api.giphy.com', // Do not change this
-			path: '/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=' + tarId,
-			method: 'GET',
-		};
-		let request = http.request(reqOpts, response => {
-			response.on('data', chunk => {
-				try {
-					let data = JSON.parse(chunk);
-					let output = '<center><img src="' + data.data["image_url"] + '" width="50%"></center>';
-					if (!this.runBroadcast()) return;
-					if (data.data["image_url"] === undefined) {
-						this.errorReply("ERROR CODE 404: No images found!");
-						return room.update();
-					} else {
-						this.sendReplyBox(output);
-						return room.update();
-					}
-				} catch (e) {
-					this.errorReply("ERROR CODE 503: Giphy is unavaliable right now. Try again later.");
-					return room.update();
-				}
-			});
-		});
-		request.end();
-	},
-	animalshelp: ['Animals Plugin by DarkNightSkies & Kyv.n(♥)',
-		'/animals cat - Displays a cat.',
-		'/animals kitten - Displays a kitten.',
-		'/animals dog - Displays a dog.',
-		'/animals puppy - Displays a puppy.',
-		'/animals bunny - Displays a bunny.',
-		'/animals otter - Displays an otter.',
-		'/animals pokemon - Displays a pokemon.',
-		'/animals help - Displays this help box.',
-	],
 
 	'!seen': true,
 	seen: function (target) {
