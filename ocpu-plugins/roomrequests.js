@@ -30,6 +30,11 @@ exports.commands = {
 		target = target.split(',');
 		if (target.length < 3) return this.parse('/help requestroom');
 		if (['public', 'private'].indexOf(toId(target[1])) === -1) return this.errorReply(`Valid room types are public and private.`);
+		if (['private'].indexOf(toId(target[1])) === 1) {
+			if (!this.can('broadcast')) {
+				return this.errorReply("Only global voices and higher can request private rooms.");
+			}
+		}
 		let desc = '';
 		for (let i = 2; i < target.length; i++) {
 			desc += target[i] + (i === target.length - 1 ? "" : ",");
@@ -57,7 +62,7 @@ exports.commands = {
 		let curRequest = Db.rooms.get(target);
 		if (!curRequest || curRequest.blacklisted) return this.errorReply(`${(target === user.userid ? "You don't " : target + " does not ")} have a pending room request.`);
 		let output = `<center><h1>OCPU Room Request</h1></center><b>Requester</b>: ${target} <br/><b>Room Name</b>: ${curRequest.name}<br/><b>Room Type</b>: ${curRequest.type}<br/><b>Description</b>: ${curRequest.desc}<br/>`;
-		if (user.can('roomowner')) output += `${(curRequest.staff ? `The requester is a OCPU global staff member` : (curRequest.trusted ? `The requester is a trusted user.` : ``))}`;
+		if (user.can('lock')) output += `${(curRequest.staff ? `The requester is a OCPU global staff member` : (curRequest.trusted ? `The requester is a trusted user.` : ``))}`;
 		this.sendReplyBox(output);
 	},
 	checkroomrequesthelp: ["/checkroomrequest (username) - Check a users current room request. leave username blank to default to your request. Requires: &, ~ if username is not your username."],
