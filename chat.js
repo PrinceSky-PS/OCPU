@@ -288,27 +288,28 @@ class CommandContext {
 
 		// Output the message
 
-	if (message && message !== true && typeof message.then !== 'function') {
-		if (this.pmTarget) {
-			Chat.sendPM(message, this.user, this.pmTarget);
-		} else {
-			let emoticons = OCPU.parseEmoticons(message);
-			if (emoticons && !this.room.disableEmoticons) {
-				for (let u in this.room.users) {
-					let curUser = Users(u);
-					if (!curUser || !curUser.connected) continue;
-						if (OCPU.ignoreEmotes[curUser.userid]) {
-							curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-							continue;
-						}
+		if (message && message !== true && typeof message.then !== 'function') {
+			if (this.pmTarget) {
+				Chat.sendPM(message, this.user, this.pmTarget);
+			} else {
+				let emoticons = OCPU.parseEmoticons(message);
+				if (emoticons && !this.room.disableEmoticons) {
+					for (let u in this.room.users) {
+						let curUser = Users(u);
+						if (!curUser || !curUser.connected) continue;
+							if (OCPU.ignoreEmotes[curUser.userid]) {
+								curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+								continue;
+							}
 						curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
+					}
+					this.room.log.log.push((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+					this.room.lastUpdate = this.room.log.length;
+					this.room.messageCount++;
 				}
-				this.room.log.log.push((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-				this.room.lastUpdate = this.room.log.length;
-				this.room.messageCount++;
 			}
-		}
 		//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
+		}
 	}
 
 	/**
