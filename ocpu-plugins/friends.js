@@ -38,12 +38,12 @@ function checkFriends(userid, user) {
 			onlineUsers.push(online);
 		}
 	});
-	if (onlineUsers.length > 0 && friends[userid].notifications) user.send(`|pm|~${Config.serverName} Friend Manager|${user.getIdentity()}|/raw ${onlineUsers.length} of your friends are online: ${Chat.toListString(onlineUsers)} are online.<hr /><center><button class= "button" name= "send" value= "/friend togglenotifications">${(friends[userid].notifications ? "Remove Notifications" : "Turn On Notifications")}</button></center><hr />`);
+	if (onlineUsers.length > 0 && friends[userid].notifications) user.send(`|pm|~OCPU Friend Manager|${user.getIdentity()}|/raw ${onlineUsers.length} of your friends are online: ${Chat.toListString(onlineUsers)} are online.<hr /><center><button class= "button" name= "send" value= "/friend togglenotifications">${(friends[userid].notifications ? "Remove Notifications" : "Turn On Notifications")}</button></center><hr />`);
 	for (let friend of onlineUsers) {
-		if (friends[friend].notifications && !friends[friend].ignoreList.includes(userid)) Users(friend).send(`|pm|~${Config.serverName} Friend Manager|${Users(friend).getIdentity()}|/raw Your friend ${Server.nameColor(userid, true, true)} has just came online.<hr /><center><button class= "button" name= "send" value="/friend ignore ${userid}">Ignore Notifications from ${userid}</button><button class= "button" name= "send" value= "/friend togglenotifications">${(friends[userid].notifications ? "Remove Notifications" : "Turn On Notifications")}</button></center><hr />`);
+		if (friends[friend].notifications && !friends[friend].ignoreList.includes(userid)) Users(friend).send(`|pm|~OCPU Friend Manager|${Users(friend).getIdentity()}|/raw Your friend ${OCPU.nameColor(userid, true, true)} has just came online.<hr /><center><button class= "button" name= "send" value="/friend ignore ${userid}">Ignore Notifications from ${userid}</button><button class= "button" name= "send" value= "/friend togglenotifications">${(friends[userid].notifications ? "Remove Notifications" : "Turn On Notifications")}</button></center><hr />`);
 	}
 }
-Server.checkFriends = checkFriends;
+OCPU.checkFriends = checkFriends;
 
 function getLastSeen(userid) {
 	if (Users(userid) && Users(userid).connected) return `<font color = "limegreen"><strong>Currently Online</strong></font>`;
@@ -125,7 +125,7 @@ exports.commands = {
 			friends[user.userid].friendsList.push(targetId);
 			friends[targetId].pendingRequests.splice(friends[targetId].pendingRequests.indexOf(user.userid), 1);
 			write();
-			if (targetUser && targetUser.connected) targetUser.send(`|pm|${user.getIdentity()}|${targetUser.getIdentity()}|/raw ${Server.nameColor(user.name, true, true)} has accepted your friend request.`);
+			if (targetUser && targetUser.connected) targetUser.send(`|pm|${user.getIdentity()}|${targetUser.getIdentity()}|/raw ${OCPU.nameColor(user.name, true, true)} has accepted your friend request.`);
 			return this.sendReply(`You have successfully accepted ${target}'s friend request.`);
 		},
 
@@ -140,7 +140,7 @@ exports.commands = {
 			if (!friends[targetId].pendingRequests.includes(user.userid)) return this.errorReply(`${target} has not sent you a friend request.`);
 			friends[targetId].pendingRequests.splice(friends[targetId].pendingRequests.indexOf(user.userid), 1);
 			write();
-			if (targetUser && targetUser.connected) targetUser.send(`|pm|${user.getIdentity()}|${targetUser.getIdentity()}|/raw ${Server.nameColor(user.name, true, true)} has declined your friend request.`);
+			if (targetUser && targetUser.connected) targetUser.send(`|pm|${user.getIdentity()}|${targetUser.getIdentity()}|/raw ${OCPU.nameColor(user.name, true, true)} has declined your friend request.`);
 			return this.sendReply(`You have successfully denied ${target}'s friend request.`);
 		},
 
@@ -255,8 +255,8 @@ exports.commands = {
 			let friendsId = toId(target);
 			if (!friends[friendsId]) return this.errorReply(`${target} has not initialized their friends list yet.`);
 			if (friends[friendsId].private && friendsId !== user.userid) return this.errorReply(`${target} has privatized their friends list.`);
-			if (friends[friendsId].friendsList.length < 1) return this.sendReplyBox(`<center>${Server.nameColor(target, true, true)} currently doesn't have any friends.</center>`);
-			let display = `<div style="max-height: 200px; width: 100%; overflow: scroll;"><h2 style="text-align: center">${Server.nameColor(target, true, true)}'s Friends List (${friends[friendsId].friendsList.length} Friend${friends[friendsId].friendsList.length > 1 ? "s" : ""}):</h2><table border="1" cellspacing ="0" cellpadding="${this.broadcasting ? 3 : 2}"><tr style="font-weight: bold"><td>Friend:</td><td>Last Seen:</td>`;
+			if (friends[friendsId].friendsList.length < 1) return this.sendReplyBox(`<center>${OCPU.nameColor(target, true, true)} currently doesn't have any friends.</center>`);
+			let display = `<div style="max-height: 200px; width: 100%; overflow: scroll;"><h2 style="text-align: center">${OCPU.nameColor(target, true, true)}'s Friends List (${friends[friendsId].friendsList.length} Friend${friends[friendsId].friendsList.length > 1 ? "s" : ""}):</h2><table border="1" cellspacing ="0" cellpadding="${this.broadcasting ? 3 : 2}"><tr style="font-weight: bold"><td>Friend:</td><td>Last Seen:</td>`;
 			if (!this.broadcasting && friendsId === user.userid) display += `<td>Unfriend:</td>`;
 			display += `</tr>`;
 			let sortedFriends = friends[friendsId].friendsList.sort(function (a, b) {
@@ -272,7 +272,7 @@ exports.commands = {
 				if (friends[friend].private && this.broadcasting && friendsId !== user.userid) {
 					return;
 				} else {
-					display += `<tr><td style="border: 2px solid #000000; width: 20%; text-align: center"><button class="button" name="parseCommand" value="/user ${friend}">${Server.nameColor(friend, true, true)}</button></td><td style="border: 2px solid #000000; width: 20%; text-align: center">${getLastSeen(friend)}</td>`;
+					display += `<tr><td style="border: 2px solid #000000; width: 20%; text-align: center"><button class="button" name="parseCommand" value="/user ${friend}">${OCPU.nameColor(friend, true, true)}</button></td><td style="border: 2px solid #000000; width: 20%; text-align: center">${getLastSeen(friend)}</td>`;
 					if (!this.broadcasting && friendsId === user.userid) {
 						display += `<td style="border: 2px solid #000000; width: 20%; text-align: center"><button class="button" name="send" value="/friends unfriend ${friend}">${friend}</button></td>`;
 					}
