@@ -21,6 +21,7 @@ function isDev(user) {
 	if (dev === 1) return true;
 	return false;
 }
+OCPU.isDev = isDev;
 
 function isVIP(user) {
 	if (!user) return;

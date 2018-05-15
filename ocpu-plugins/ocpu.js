@@ -47,6 +47,16 @@ OCPU.pmAll = function (message, pmName) {
 	});
 };
 
+function devPM(user, message) {
+	let developers = Db.devs.keys();
+	for (const name of developers) {
+		const u = Users(name);
+		if (!(u && u.connected)) continue;
+		u.send(`|pm|${user}|${u.group}${u.name}|/raw ${message}\n<small style="font-style="italic">You can message DEV chat by using /devmsg [msg].</small>`);
+	}
+}
+OCPU.devPM = devPM;
+
 OCPU.regdate = function (target, callback) {
 	target = toId(target);
 	if (regdateCache[target]) return callback(regdateCache[target]);
@@ -828,12 +838,14 @@ exports.commands = {
 		if (!this.can('pban')) return false;
 		OCPU.messageSeniorStaff(target, false, user.name);
 	},
+
 	pas: 'pmallstaff',
 	pmallstaff: function (target, room, user) {
 		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every staff user in a room.');
 		if (!this.can('pban')) return false;
 		OCPU.pmStaff(target, false, user.name);
 	},
+
 	masspm: 'pmall',
 	pmall: function (target, room, user) {
 		if (!target) return this.sendReply('/pmall [message] - Sends a PM to every user in a room.');
@@ -841,6 +853,7 @@ exports.commands = {
 		OCPU.pmAll(target);
 		Monitor.log("(" + Chat.escapeHTML(user.name) + " has PMed all: " + Chat.escapeHTML(target).replace("&apos;", "'") + ")");
 	},
+
 	credit: 'credits',
 	credits: function (target, room, user) {
 		let popup = "|html|" + "<font size=5>OCPU Credits</font><br />" +
@@ -874,6 +887,7 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		return this.sendReplyBox(['Signs point to yes.', 'Yes.', 'Reply hazy, try again.', 'Without a doubt.', 'My sources say no.', 'As I see it, yes.', 'You may rely on it.', 'Concentrate and ask again.', 'Outlook not so good.', 'It is decidedly so.', 'Better not tell you now.', 'Very doubtful.', 'Yes - definitely.', 'It is certain.', 'Cannot predict now.', 'Most likely.', 'Ask again later.', 'My reply is no.', 'Outlook good.', 'Don\'t count on it.'].sample());
 	},
+
 	coins: 'coingame',
 	coin: 'coingame',
 	coingame: function (target, room, user) {
@@ -888,16 +902,13 @@ exports.commands = {
 		}
 		return this.sendReplyBox('<center><font size="3"><strong>Coin Game!</strong></font><br>' + results + '');
 	},
+
 	errorlogs: 'crashlogs',
 	crashlogs: function (target, room, user) {
-	        if (user.userid === "alfastorm" || user.userid === 'joltsjolteon' || user.userid === 'insist') {
-	                let crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');
-		        user.send('|popup|' + crashes);
-		        return;
-	        } else {
-		        if (!this.can('forcewin')) return false;
-		        let crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');
-		        user.send('|popup|' + crashes);
+		if (this.can("forcewin") || OCPU.isDev(user.userid)) {
+			let crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');
+			user.send(`|popup|${crashes}`);
+			return;
 		}
 	},
 
@@ -909,6 +920,7 @@ exports.commands = {
 			'/deletecode [user] - Deletes this user\'s friend code from the server (Requires %, @, &, ~)<br>' +
 			'<i>--Any questions, PM papew!</i>');
 	},
+
 	friendcode: 'fc',
 	fc: function (target, room, user, connection) {
 		if (!target) {
@@ -960,7 +972,7 @@ exports.commands = {
 				let re = new RegExp(line, 'g');
 				let result = data.replace(re, '');
 				fs.writeFile('config/friendcodes.txt', result, 'utf8', err => {
-					if (err) this.sendReply(err);
+					if (err) return this.sendReply(err);
 					this.sendReply('The Friendcode ' + line + ' has been deleted.');
 				});
 			} else {
