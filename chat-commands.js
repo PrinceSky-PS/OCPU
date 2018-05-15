@@ -3282,13 +3282,13 @@ exports.commands = {
 		this.sendReply("||[Main process] RSS: " + results[0] + ", Heap: " + results[1] + " / " + results[2]);
 	},
 
-	bash: function (target, room, user, connection) {
+	bash: function (target, room, user, cmd, connection) {
 		if (!user.hasConsoleAccess(connection)) {
 			return this.errorReply("/bash - Access denied.");
 		}
 		if (!target) return this.parse('/help bash');
 
-		if (target === `git pull`) connection.sendTo(room, "Please use '/updateserver' instead of this. This will still go through.");
+		if (target === `git pull` && cmd !== 'updateserver') connection.sendTo(room, "Please use '/updateserver' instead of this. This will still go through.");
 
 		connection.sendTo(room, "$ " + target);
 		require('child_process').exec(target, (error, stdout, stderr) => {

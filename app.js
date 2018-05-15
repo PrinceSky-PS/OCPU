@@ -121,6 +121,7 @@ global.OCPU = {};
 
 global.Tournaments = require('./tournaments');
 
+global.OCPU = require('./ocpu-plugins/ocpuusers.js').OCPU;
 global.Dnsbl = require('./dnsbl');
 Dnsbl.loadDatacenters();
 
