@@ -350,13 +350,10 @@ exports.github = {
 //     - minigame: make minigames (hangman, polls, etc.).
 //     - game: make games.
 //     - gamemanagement: enable/disable games and minigames.
-// OCPU-specific permissions:
-//  - customtitle: Allows special profile management.
-//  - faction: Allows special management of all factions on this server
-//  - pban: Enables the usage of the perma-ban, perma-lock, and other commands like such
-//  - roomshop: Allows the user to use Room Shop related commands
-//  - quotes: Allows the user to use Quote related commands
-//  -
+//   OCPU-specific permissions:
+//     - customtitle: Allows special profile management.
+//     - faction: Allows special management of all factions on this server
+//     - pban: Enables the usage of the perma-ban, perma-lock, and other commands like such
 
 exports.grouplist = [
 	{
@@ -486,7 +483,6 @@ exports.grouplist = [
 		tournaments: true,
 		game: true,
 		faction: true,
-		roomshop: true,
 	},
 	{
 		symbol: '%',
@@ -510,7 +506,6 @@ exports.grouplist = [
 		joinbattle: true,
 		minigame: true,
 		customtitle: true,
-		quotes: true,
 	},
 	{
 		symbol: '+',

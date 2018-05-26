@@ -2765,7 +2765,7 @@ exports.commands = {
 
 	hotpatch: function (target, room, user) {
 		if (!target) return this.parse('/help hotpatch');
-		if (!this.can('hotpatch') && !OCPU.isDev(user.userid)) return;
+		if (!this.can('hotpatch')) return;
 
 		const lock = Monitor.hotpatchLock;
 		const hotpatches = ['chat', 'formats', 'loginserver', 'punishments', 'dnsbl'];
@@ -2887,7 +2887,7 @@ exports.commands = {
 
 	hotpatchlock: 'nohotpatch',
 	nohotpatch: function (target, room, user) {
-		if (!this.can('hotpatch') && !OCPU.isDev(user.userid)) return;
+		if (!this.can('hotpatch')) return;
 		if (!target) return this.parse('/help nohotpatch');
 
 		const separator = ' ';
@@ -2914,7 +2914,7 @@ exports.commands = {
 	nohotpatchhelp: [`/nohotpatch [chat|formats|battles|validator|tournaments|punishments|all] [reason] - Disables hotpatching the specified part of the simulator. Requires: ~`],
 
 	savelearnsets: function (target, room, user) {
-		if (!this.can('hotpatch') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('hotpatch')) return false;
 		this.sendReply("saving...");
 		FS('data/learnsets.js').write(`'use strict';\n\nexports.BattleLearnsets = {\n` +
 			Object.entries(Dex.data.Learnsets).map(([k, v]) => (
@@ -3074,7 +3074,7 @@ exports.commands = {
 	},
 
 	lockdown: function (target, room, user) {
-		if (!this.can('lockdown') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('lockdown')) return false;
 
 		Rooms.global.startLockdown();
 
@@ -3085,7 +3085,7 @@ exports.commands = {
 
 	autolockdown: 'autolockdownkill',
 	autolockdownkill: function (target, room, user) {
-		if (!this.can('lockdown') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('lockdown')) return false;
 		if (Config.autolockdown === undefined) Config.autolockdown = true;
 
 		if (this.meansYes(target)) {
@@ -3110,7 +3110,7 @@ exports.commands = {
 	],
 
 	prelockdown: function (target, room, user) {
-		if (!this.can('lockdown') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('lockdown')) return false;
 		Rooms.global.lockdown = 'pre';
 		this.sendReply("Tournaments have been disabled in preparation for the server restart.");
 		const logRoom = Rooms('staff') || room;
@@ -3118,7 +3118,7 @@ exports.commands = {
 	},
 
 	slowlockdown: function (target, room, user) {
-		if (!this.can('lockdown') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('lockdown')) return false;
 
 		Rooms.global.startLockdown(undefined, true);
 
@@ -3127,7 +3127,7 @@ exports.commands = {
 	},
 
 	endlockdown: function (target, room, user) {
-		if (!this.can('lockdown') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('lockdown')) return false;
 
 		if (!Rooms.global.lockdown) {
 			return this.errorReply("We're not under lockdown right now.");
@@ -3146,7 +3146,7 @@ exports.commands = {
 	},
 
 	emergency: function (target, room, user) {
-		if (!this.can('lockdown') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('lockdown')) return false;
 
 		if (Config.emergency) {
 			return this.errorReply("We're already in emergency mode.");
@@ -3166,7 +3166,7 @@ exports.commands = {
 	},
 
 	endemergency: function (target, room, user) {
-		if (!this.can('lockdown') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('lockdown')) return false;
 
 		if (!Config.emergency) {
 			return this.errorReply("We're not in emergency mode.");
@@ -3185,7 +3185,7 @@ exports.commands = {
 	},
 
 	kill: function (target, room, user) {
-		if (!this.can('lockdown') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('lockdown')) return false;
 
 		if (Rooms.global.lockdown !== true) {
 			return this.errorReply("For safety reasons, /kill can only be used during lockdown.");
@@ -3227,14 +3227,14 @@ exports.commands = {
 	loadbanlisthelp: [`/loadbanlist - Loads the bans located at ipbans.txt. The command is executed automatically at startup. Requires: ~`],
 
 	refreshpage: function (target, room, user) {
-		if (!this.can('hotpatch') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('hotpatch')) return false;
 		Rooms.global.send('|refresh|');
 		const logRoom = Rooms('staff') || room;
 		logRoom.roomlog(`${user.name} used /refreshpage`);
 	},
 
 	updateserver: async function (target, room, user, connection) {
-		if (!user.can('hotpatch') && !OCPU.isDev(user.userid)) {
+		if (!user.can('hotpatch')) {
 			return this.errorReply(`/updateserver - Access denied.`);
 		}
 
@@ -3257,7 +3257,7 @@ exports.commands = {
 		if (Rooms.global.lockdown !== true) {
 			return this.errorReply('/crashfixed - There is no active crash.');
 		}
-		if (!this.can('hotpatch') && !OCPU.isDev(user.userid)) return false;
+		if (!this.can('hotpatch')) return false;
 
 		Rooms.global.lockdown = false;
 		if (Rooms.lobby) {
@@ -3270,8 +3270,8 @@ exports.commands = {
 	crashfixedhelp: [`/crashfixed - Ends the active lockdown caused by a crash without the need of a restart. Requires: ~`],
 
 	memusage: 'memoryusage',
-	memoryusage: function (target, room, user) {
-		if (!this.can('hotpatch') && !OCPU.isDev(user.userid)) return false;
+	memoryusage: function (target) {
+		if (!this.can('hotpatch')) return false;
 		let memUsage = process.memoryUsage();
 		let results = [memUsage.rss, memUsage.heapUsed, memUsage.heapTotal];
 		let units = ["B", "KiB", "MiB", "GiB", "TiB"];
