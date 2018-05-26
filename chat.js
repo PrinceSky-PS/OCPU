@@ -292,30 +292,13 @@ class CommandContext {
 			if (this.pmTarget) {
 				Chat.sendPM(message, this.user, this.pmTarget);
 			} else {
-				// @ts-ignore
-				let emoticons = OCPU.parseEmoticons(message);
-				// @ts-ignore
-				if (emoticons && !this.room.disableEmoticons) {
-					for (let u in this.room.users) {
-						let curUser = Users(u);
-						if (!curUser || !curUser.connected) continue;
-						// @ts-ignore
-						if (OCPU.ignoreEmotes[curUser.userid]) {
-							curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-							continue;
-						}
-						curUser.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|/html ' + emoticons);
-					}
-					// @ts-ignore
-					this.room.log.log.push((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-					// @ts-ignore
-					this.room.lastUpdate = this.room.log.length;
-					// @ts-ignore
-					this.room.messageCount++;
-				}
+				this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 			}
-		//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 		}
+
+		this.update();
+
+		return message;
 	}
 
 	/**
@@ -1153,18 +1136,10 @@ Chat.parse = function (message, room, user, connection) {
  * @param {?User} onlyRecipient
  */
 Chat.sendPM = function (message, user, pmTarget, onlyRecipient = null) {
-	let noEmotes = message;
-	// @ts-ignore
-	let emoticons = OCPU.parseEmoticons(message);
-	if (emoticons) message = "/html " + emoticons;
-	// @ts-ignore
-	let buf = `|pm|${user.getIdentity()}|${pmTarget.getIdentity()}|${(OCPU.ignoreEmotes[user.userid] ? noEmotes : message)}`;
-	// TODO is onlyRecipient a user? If so we should check if they are ignoring emoticions.
+	let buf = `|pm|${user.getIdentity()}|${pmTarget.getIdentity()}|${message}`;
 	if (onlyRecipient) return onlyRecipient.send(buf);
 	user.send(buf);
-	if (pmTarget !== user) {
-		pmTarget.send(buf);
-	}
+	if (pmTarget !== user) pmTarget.send(buf);
 	pmTarget.lastPM = user.userid;
 	user.lastPM = pmTarget.userid;
 };
