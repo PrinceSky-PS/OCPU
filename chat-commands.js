@@ -1247,6 +1247,31 @@ exports.commands = {
 
 		if (!this.can('makeroom')) return false;
 
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+		let n = barredUsers.length;
+		let l = barredIps.length;
+		let i = 0;
+
+		if (n > 0) {
+			while (i < n) {
+				if (userid.includes(barredUsers[i])) {
+					return this.errorReply(`That user is barred from auth on this server.`);
+				}
+				i++;
+			}
+			i = 0;
+		}
+
+		if (l > 0) {
+			while (i < l) {
+				if (targetUser.latestIp.includes(barredIps[i])) {
+					return this.errorReply(`The IP that the selected user is on is barred from auth on this server.`);
+				}
+				i++;
+			}
+		}
+
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
 		room.auth[userid] = '#';
@@ -1292,6 +1317,31 @@ exports.commands = {
 		}
 		if (targetUser && !targetUser.registered) {
 			return this.errorReply(`User '${name}' is unregistered, and so can't be promoted.`);
+		}
+
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+		let n = barredUsers.length;
+		let l = barredIps.length;
+		let i = 0;
+
+		if (n > 0) {
+			while (i < n) {
+				if (userid.includes(barredUsers[i])) {
+					return this.errorReply(`That user is barred from auth on this server.`);
+				}
+				i++;
+			}
+			i = 0;
+		}
+
+		if (l > 0) {
+			while (i < l) {
+				if (targetUser.latestIp.includes(barredIps[i])) {
+					return this.errorReply(`The IP that the selected user is on is barred from auth on this server.`);
+				}
+				i++;
+			}
 		}
 
 		let currentGroup = room.getAuth({userid, group: (Users.usergroups[userid] || ' ').charAt(0)});
@@ -2181,6 +2231,32 @@ exports.commands = {
 		if (targetUser && !targetUser.registered) {
 			return this.errorReply(`User '${name}' is unregistered, and so can't be promoted.`);
 		}
+
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+		let n = barredUsers.length;
+		let l = barredIps.length;
+		let i = 0;
+
+		if (n > 0) {
+			while (i < n) {
+				if (userid.includes(barredUsers[i])) {
+					return this.errorReply(`That user is barred from auth on this server.`);
+				}
+				i++;
+			}
+			i = 0;
+		}
+
+		if (l > 0) {
+			while (i < l) {
+				if (targetUser.latestIp.includes(barredIps[i])) {
+					return this.errorReply(`The IP that the selected user is on is barred from auth on this server.`);
+				}
+				i++;
+			}
+		}
+
 		Users.setOfflineGroup(name, nextGroup);
 		if (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank) {
 			this.privateModAction(`(${name} was demoted to ${groupName} by ${user.name}.)`);
