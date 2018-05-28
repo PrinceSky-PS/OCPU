@@ -1249,27 +1249,19 @@ exports.commands = {
 
 		let barredUsers = Config.barredUsers;
 		let barredIps = Config.barredIps;
-		let n = barredUsers.length;
-		let l = barredIps.length;
-		let i = 0;
 
-		if (n > 0) {
-			while (i < n) {
-				if (userid.includes(barredUsers[i])) {
-					return this.errorReply(`That user is barred from auth on this server.`);
-				}
-				i++;
+		for (let value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
 			}
-			i = 0;
+			value++;
 		}
 
-		if (l > 0) {
-			while (i < l) {
-				if (targetUser.latestIp.includes(barredIps[i])) {
-					return this.errorReply(`The IP that the selected user is on is barred from auth on this server.`);
-				}
-				i++;
+		for (let value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
 			}
+			value++;
 		}
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
@@ -1321,27 +1313,19 @@ exports.commands = {
 
 		let barredUsers = Config.barredUsers;
 		let barredIps = Config.barredIps;
-		let n = barredUsers.length;
-		let l = barredIps.length;
-		let i = 0;
 
-		if (n > 0) {
-			while (i < n) {
-				if (userid.includes(barredUsers[i])) {
-					return this.errorReply(`That user is barred from auth on this server.`);
-				}
-				i++;
+		for (let value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
 			}
-			i = 0;
+			value++;
 		}
 
-		if (l > 0) {
-			while (i < l) {
-				if (targetUser.latestIp.includes(barredIps[i])) {
-					return this.errorReply(`The IP that the selected user is on is barred from auth on this server.`);
-				}
-				i++;
+		for (let value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
 			}
+			value++;
 		}
 
 		let currentGroup = room.getAuth({userid, group: (Users.usergroups[userid] || ' ').charAt(0)});
@@ -2234,27 +2218,19 @@ exports.commands = {
 
 		let barredUsers = Config.barredUsers;
 		let barredIps = Config.barredIps;
-		let n = barredUsers.length;
-		let l = barredIps.length;
-		let i = 0;
 
-		if (n > 0) {
-			while (i < n) {
-				if (userid.includes(barredUsers[i])) {
-					return this.errorReply(`That user is barred from auth on this server.`);
-				}
-				i++;
+		for (let value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
 			}
-			i = 0;
+			value++;
 		}
 
-		if (l > 0) {
-			while (i < l) {
-				if (targetUser.latestIp.includes(barredIps[i])) {
-					return this.errorReply(`The IP that the selected user is on is barred from auth on this server.`);
-				}
-				i++;
+		for (let value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
 			}
+			value++;
 		}
 
 		Users.setOfflineGroup(name, nextGroup);
