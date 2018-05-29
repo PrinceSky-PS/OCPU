@@ -1161,6 +1161,23 @@ exports.commands = {
 
 		if (!this.can('makeroom')) return false;
 
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+
+		for (let value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
+			}
+			value++;
+		}
+
+		for (let value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
+			}
+			value++;
+		}
+
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
 		room.auth[userid] = '#';
