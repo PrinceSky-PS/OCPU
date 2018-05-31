@@ -1170,7 +1170,7 @@ exports.commands = {
 			}
 		}
 
-		for (cons5t value of barredIps) {
+		for (const value of barredIps) {
 			if (value === targetUser.latestIp) {
 				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
 			}
@@ -1232,7 +1232,7 @@ exports.commands = {
 			}
 		}
 
-		for (cons5t value of barredIps) {
+		for (const value of barredIps) {
 			if (value === targetUser.latestIp) {
 				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
 			}
