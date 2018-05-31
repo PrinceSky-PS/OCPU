@@ -1250,18 +1250,16 @@ exports.commands = {
 		let barredUsers = Config.barredUsers;
 		let barredIps = Config.barredIps;
 
-		for (let value of barredUsers) {
+		for (const value of barredUsers) {
 			if (value === userid) {
 				return this.errorReply(`That user is barred from public auth.`);
 			}
-			value++;
 		}
 
-		for (let value of barredIps) {
+		for (const value of barredIps) {
 			if (value === targetUser.latestIp) {
 				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
 			}
-			value++;
 		}
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
@@ -1314,18 +1312,16 @@ exports.commands = {
 		let barredUsers = Config.barredUsers;
 		let barredIps = Config.barredIps;
 
-		for (let value of barredUsers) {
+		for (const value of barredUsers) {
 			if (value === userid) {
 				return this.errorReply(`That user is barred from public auth.`);
 			}
-			value++;
 		}
 
-		for (let value of barredIps) {
+		for (const value of barredIps) {
 			if (value === targetUser.latestIp) {
 				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
 			}
-			value++;
 		}
 
 		let currentGroup = room.getAuth({userid, group: (Users.usergroups[userid] || ' ').charAt(0)});
