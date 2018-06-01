@@ -1544,6 +1544,7 @@ exports.commands = {
 			`- /roomdevoice <em>username</em>: remove a room voice<br />` +
 			`- /staffintro <em>intro</em>: set the staff introduction that will be displayed for all staff joining the room<br />` +
 			`- /roomsettings: change a variety of room settings, namely modchat<br />` +
+			`- /draft: a variety of commands for using the draft system<br />` +
 			`<br />` +
 			`<strong>Room owners (#)</strong> can also use:<br />` +
 			`- /roomintro <em>intro</em>: set the room introduction that will be displayed for all users joining the room<br />` +
@@ -1555,6 +1556,10 @@ exports.commands = {
 			`- !htmlbox <em>HTML code</em>: broadcast a box of HTML code to the room<br />` +
 			`- !showimage <em>[url], [width], [height]</em>: show an image to the room<br />` +
 			`- /roomsettings: change a variety of room settings, including modchat, capsfilter, etc<br />` +
+			`- /roomshop: Administrative roomshop commands (after created)<br />` +
+			`<br />` +
+			`<strong>The room founder</strong> can also use:<br />` +
+			`- /roomowner: Sets a new roomowner<br />` +
 			`<br />` +
 			`More detailed help can be found in the <a href="https://www.smogon.com/forums/posts/6774654/">roomauth guide</a><br />` +
 			`<br />` +
