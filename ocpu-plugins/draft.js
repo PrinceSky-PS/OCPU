@@ -24,7 +24,7 @@ class Draft {
 		this.snake = true;
 	}
 
-	addTeam(teamname, manager, self) {
+	addTeam(teamname, self, manager) {
 		if (this.teams[teamname]) return self.errorReply("There is already a team with this Team Name.");
 		this.teams[teamname] = {
 			"manager": toId(manager),
@@ -183,7 +183,7 @@ exports.commands = {
 			if (!teamName || !manager) return this.parse("/draft help");
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 			if (!drafts[room].state === "prep") return this.errorReply("You may not add teams to the draft at this moment.");
-			drafts[room].addTeam(teamName, manager, this);
+			drafts[room].addTeam(teamName, this, manager);
 		},
 
 		eliminateteam: "removeteam",
