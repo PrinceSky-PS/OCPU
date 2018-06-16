@@ -3182,8 +3182,11 @@ exports.commands = {
 		}
 		if (Rooms.global.lockdown === true) {
 			Rooms.rooms.forEach((curRoom, id) => {
-				if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-green\"><b>The server restart was canceled.</b></div>").update();
+				if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-green\"><b>The server restart was cancelled.</b></div>").update();
 			});
+			for (const user of Users.users.values()) {
+				user.send(`|pm|~OCPU Server|${user.group}${user.name}|/raw <div class="broadcast-green"><b>The server restart has been cancelled.</b></div>`);
+			}
 		} else {
 			this.sendReply("Preparation for the server shutdown was canceled.");
 		}
@@ -3205,7 +3208,7 @@ exports.commands = {
 			Config.pmmodchat = '%';
 		}
 		Rooms.rooms.forEach((curRoom, id) => {
-			if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-red\">The server has entered emergency mode. Some features might be disabled or limited.</div>").update();
+			if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-red\">The server has entered emergency mode. Some features may be disabled or limited.</div>").update();
 			if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-red\">PMs have been restricted to Global Staff only.").update();
 		});
 
