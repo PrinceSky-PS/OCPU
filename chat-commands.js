@@ -3136,6 +3136,9 @@ exports.commands = {
 			Rooms.rooms.forEach((curRoom, id) => {
 				if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-green\"><b>The server restart was canceled.</b></div>").update();
 			});
+			for (const user of Users.users.values()) {
+				user.send(`|pm|~OCPU Server|${user.group}${user.name}|/raw <div class="broadcast-green"><b>The server restart has been cancled.</b></div>`);
+			}
 		} else {
 			this.sendReply("Preparation for the server shutdown was canceled.");
 		}
