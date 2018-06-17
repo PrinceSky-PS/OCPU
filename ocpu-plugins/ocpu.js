@@ -849,13 +849,16 @@ exports.commands = {
 		    "- " + OCPU.nameColor('SparkyHeliolisk', true) + " (Sysop, Creative Admin, Development)<br />" +
 		    "- " + OCPU.nameColor('AlfaStorm', true) + " (Sysop, Technical Admin, Development)<br />" +
 		    "<br />" +
-			 "<u>Contributors</u><br />" +
+			 "<u>Contributors:</u><br />" +
 			 "- " + OCPU.nameColor('SalemTheShadow', true) + " (Technical Captain, Development)<br />" +
 			 "- " + OCPU.nameColor('Glameowch', true) + " (Events Lead)<br />" +
 			 "<br />" +
 		    "<u>Development:</u><br />" +
 		    "- " + OCPU.nameColor('Insist', true) + " (Development, Fixed Eslint)<br />" +
 		    "<br />" +
+			 "<u>Partners:</u><br />" +
+			 "- " + OCPU.nameColor('BowTie831', true) + " (Partner)<br />" +
+			 "<br />" +
 		    "<u>Special Thanks:</u><br />" +
 		    "- Current staff team<br />" +
 		    "- Our regular users<br />" +
