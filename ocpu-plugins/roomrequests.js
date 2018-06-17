@@ -17,6 +17,7 @@ exports.commands = {
 		if (!user.registered) return this.errorReply(`Unregistered names cannot be promoted, so they cannot request rooms.`);
 		if (!user.autoconfirmed) return this.errorReply(`You must be autoconfirmed to request a room.`);
 		if (!allowRequests) return this.errorReply(`Room requests are currently closed.`);
+		if (!this.can('bypassall') && OCPU.ExpControl.level(user.userid) < 25) return this.errorReply(`You must be at least level 25 before requesting rooms.`);
 		let curRequest = Db.rooms.get(user.userid, null);
 		if (curRequest) {
 			if (curRequest.blacklist) return this.errorReply(`You are banned from requesting rooms.`);

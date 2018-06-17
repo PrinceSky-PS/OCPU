@@ -90,47 +90,39 @@ class ExpFunctions {
 				if (oldLevel < level) {
 					let reward = '';
 					switch (level) {
-					case 5:
-						Economy.logTransaction(`${user.name} received a profile background and profile music for reaching level ${level}.`);
-						Monitor.log(`${user.userid} has earned a profile background and profile music for reaching level ${level}!`);
-						if (!user.tokens) user.tokens = {};
-						user.tokens.bg = true;
-						user.tokens.music = true;
-						reward = `a Profile Background and Profile Music. To claim your profile background and profile music, use the command /usetoken bg, [img] and /usetoken music, [song url], [title of the song] respectively.`;
-						break;
 					case 10:
-						Economy.logTransaction(`${user.name} received a custom avatar for reaching level ${level}.`);
-						Monitor.log(`${user.name} has reached Level ${level} and earned a Custom Avatar.`);
-						reward = `a Custom Avatar. To claim your avatar, please PM a Global Voice or higher to set your avatar.`;
+						Economy.logTransaction(`${user.name} received requesting custom avatars for reaching level ${level}.`);
+						Monitor.log(`${user.name} has reached Level ${level} and earned requesting Custom Avatars.`);
+						reward = `requesting Custom Avatar. To request an avatar, please PM an Upper Staff member.`;
 						break;
 					case 15:
-						Economy.logTransaction(`${user.name} received a custom title for reaching level ${level}.`);
-						Monitor.log(`${user.name} has reached Level ${level} and earned a Profile Title.`);
-						reward = `a Profile Title. To claim your profile title, please PM a Global Driver or higher to set your Profile Title.`;
+						Economy.logTransaction(`${user.name} received requesting custom titles for reaching level ${level}.`);
+						Monitor.log(`${user.name} has reached Level ${level} and earned requesting Profile Titles.`);
+						reward = `requesting your Profile Title. To request a profile title, please PM an Upper Staff member.`;
 						break;
 					case 20:
-						Economy.logTransaction(`${user.name} received a custom icon for reaching level ${level}.`);
-						Monitor.log(`${user.name} has reached Level ${level} and earned a Custom Icon.`);
-						reward = `a Custom Userlist Icon. To claim your icon, please PM a Global Driver or higher to set your Custom Icon.`;
+						Economy.logTransaction(`${user.name} received requesting custom icons for reaching level ${level}.`);
+						Monitor.log(`${user.name} has reached Level ${level} and earned requesting Custom Icons.`);
+						reward = `requesting Custom Userlist Icon. To request an icon, PM an Upper Staff member.`;
 						break;
 					case 25:
-						Economy.logTransaction(`${user.name} received a emote for reaching level ${level}.`);
-						Monitor.log(`${user.name} has reached Level ${level} and earned a Custom Emoticon.`);
-						reward = `an Emote. To claim your emote, use the command please PM a Global Driver or higher to set your Custom Emoticon.`;
+						Economy.logTransaction(`${user.name} received the ability to request rooms for reaching level ${level}.`);
+						Monitor.log(`${user.name} has reached Level ${level} and earned the ability to request rooms.`);
+						reward = `requesting rooms. To request a room, use the command /rr.`;
 						break;
 					case 30:
-						Economy.logTransaction(`${user.name} received a custom color for reaching level ${level}.`);
-						Monitor.log(`${user.name} has reached Level ${level} and earned a Custom Color.`);
-						reward = `a Custom Color. To claim your custom color, use the command please PM a Global Driver or higher to set your Custom Color.`;
+						Economy.logTransaction(`${user.name} received requesting custom colors for reaching level ${level}.`);
+						Monitor.log(`${user.name} has reached Level ${level} and earned requesting Custom Colors.`);
+						reward = `requesting custom colors. To request a custom color, PM a staff member.`;
 						break;
 					case 35:
 						Economy.writeMoney(user.userid, 50);
 						reward = `50 ${currencyPlural}.`;
 						break;
 					case 40:
-						Economy.logTransaction(`${user.name} received a chatroom for reaching level ${level}.`);
-						OCPU.messageSeniorStaff(`${user.name} has earned a chatroom for reaching level ${level}!`);
-						reward = `a Chatroom. To claim your chatroom, Contact a Leader (&) or Administrator (~).`;
+						Economy.logTransaction(`${user.name} received a badge and a league for reaching level ${level}.`);
+						OCPU.messageSeniorStaff(`${user.name} has earned a badge and a league for reaching level ${level}!`);
+						reward = `a badge. PM a Leader (&) or Administrator (~) to obtain your badge.`;
 						break;
 					default:
 						Economy.writeMoney(user.userid, Math.ceil(level * 0.5));
@@ -174,15 +166,14 @@ exports.commands = {
 			EXP.readExp(user.userid, exp => {
 				this.sendReplyBox(
 					"Name: " + OCPU.nameColor(user.userid, true) + "<br />Current level: " + OCPU.ExpControl.level(user.userid) + "<br />Current Exp: " + exp + "<br />Exp Needed for Next level: " + OCPU.ExpControl.nextLevel(user.userid) +
-					"<br />All rewards have a 1 time use! <br /><br />" +
-					"Level 5 unlocks a free Profile Background and Song. <br /><br />" +
-					"Level 10 unlocks a free Custom Avatar. <br /><br />" +
-					"Level 15 unlocks a free Profile Title. <br /><br />" +
-					"Level 20 unlocks a free Custom Userlist Icon. <br /><br />" +
-					"Level 25 unlocks a free Emote. <br /><br />" +
-					"Level 30 unlocks a free Custom Color.  <br /><br />" +
+					"<br />Rewards<br /><br />" +
+					"Level 10 unlocks requesting for a custom avatar <br /><br />" +
+					"Level 15 unlocks requesting a Profile Title. <br /><br />" +
+					"Level 20 unlocks requesting a Custom Userlist Icon. <br /><br />" +
+					"Level 25 unlocks requesting Rooms. <br /><br />" +
+					"Level 30 unlocks requesting a Custom Color from Upper Staff. <br /><br />" +
 					"Level 35 unlocks 50 " + currencyPlural + ". <br /><br />" +
-					"Level 40 unlocks a free Chatroom. <br /><br />"
+					"Level 40 unlocks a badge for your profile. <br /><br />"
 				);
 			});
 		}

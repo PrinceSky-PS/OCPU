@@ -858,6 +858,7 @@ exports.commands = {
 		    "<br />" +
 			 "<u>Partners:</u><br />" +
 			 "- " + OCPU.nameColor('BowTie831', true) + " (Partner)<br />" +
+			 "<br />" +
 		    "<u>Special Thanks:</u><br />" +
 		    "- Current staff team<br />" +
 		    "- Our regular users<br />" +
