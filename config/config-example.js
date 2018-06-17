@@ -7,6 +7,11 @@ exports.port = 8000;
 //   This should be kept set to 0.0.0.0 unless you know what you're doing.
 exports.bindaddress = '0.0.0.0';
 
+// Barred users/ip who should not have any auth. All users in this will
+//  never be able to be given auth of any kind as long as they are in this array.
+exports.barredUsers = [];
+exports.barredIps = [];
+
 
 // gmcl - Automatically locks the globalmodchat commands.
 exports.gmcl = true;

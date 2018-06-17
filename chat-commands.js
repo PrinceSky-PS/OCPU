@@ -1247,6 +1247,21 @@ exports.commands = {
 
 		if (!this.can('makeroom')) return false;
 
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+
+		for (const value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
+			}
+		}
+
+		for (const value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
+			}
+		}
+
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
 		room.auth[userid] = '#';
@@ -1292,6 +1307,21 @@ exports.commands = {
 		}
 		if (targetUser && !targetUser.registered) {
 			return this.errorReply(`User '${name}' is unregistered, and so can't be promoted.`);
+		}
+
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+
+		for (const value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
+			}
+		}
+
+		for (const value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
+			}
 		}
 
 		let currentGroup = room.getAuth({userid, group: (Users.usergroups[userid] || ' ').charAt(0)});
@@ -2181,6 +2211,24 @@ exports.commands = {
 		if (targetUser && !targetUser.registered) {
 			return this.errorReply(`User '${name}' is unregistered, and so can't be promoted.`);
 		}
+
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+
+		for (let value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
+			}
+			value++;
+		}
+
+		for (let value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
+			}
+			value++;
+		}
+
 		Users.setOfflineGroup(name, nextGroup);
 		if (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank) {
 			this.privateModAction(`(${name} was demoted to ${groupName} by ${user.name}.)`);

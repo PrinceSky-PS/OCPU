@@ -1161,6 +1161,21 @@ exports.commands = {
 
 		if (!this.can('makeroom')) return false;
 
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+
+		for (const value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
+			}
+		}
+
+		for (const value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
+			}
+		}
+
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
 		room.auth[userid] = '#';
@@ -1206,6 +1221,21 @@ exports.commands = {
 
 		if (!user.can('makeroom')) {
 			if (user.userid !== room.founder) return false;
+		}
+
+		let barredUsers = Config.barredUsers;
+		let barredIps = Config.barredIps;
+
+		for (const value of barredUsers) {
+			if (value === userid) {
+				return this.errorReply(`That user is barred from public auth.`);
+			}
+		}
+
+		for (const value of barredIps) {
+			if (value === targetUser.latestIp) {
+				return this.errorReply(`The IP that the selected user is on is barred from public auth.`);
+			}
 		}
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
