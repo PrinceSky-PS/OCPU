@@ -3,3 +3,4 @@ logs/
 dev-tools/globals.js
 node_modules/
 ocpu-plugins/ocpuusers.js
+ocpu-plugins/custom-commands.js
