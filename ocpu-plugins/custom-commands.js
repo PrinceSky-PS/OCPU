@@ -3,6 +3,6 @@
 exports.commands = {
 	shrug: function (target, room, user) {
 		// @ts-ignore
-		this.parse("¯\_(ツ)_/¯");
+		this.parse("¯\\_(ツ)_/¯");
 	},
 };
