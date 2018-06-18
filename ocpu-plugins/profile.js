@@ -30,6 +30,14 @@ function isVIP(user) {
 	return false;
 }
 
+function isPart(user) {
+	if (!user) return;
+	if (typeof user === 'object') user = user.userid;
+	let part = Db.parts.get(toId(user));
+	if (part === 1) return true;
+	return false;
+}
+
 function showTitle(userid) {
 	userid = toId(userid);
 	if (Db.customtitles.has(userid)) {
@@ -39,12 +47,17 @@ function showTitle(userid) {
 }
 
 function devCheck(user) {
-	if (isDev(user)) return '<font color="#009320">(<strong>Developer</strong>)</font>';
+	if (isDev(user)) return '<font color="#A00909">(<strong>Developer</strong>)</font>';
 	return '';
 }
 
 function vipCheck(user) {
 	if (isVIP(user)) return '<font color="#6390F0">(<strong>VIP User</strong>)</font>';
+	return '';
+}
+	
+function partCheck(user) {
+	if (isPart(user)) return '<font color="#009320">(<strong>Partner</dtrong>)</font>';
 	return '';
 }
 
@@ -167,6 +180,56 @@ exports.commands = {
 				'<code>take [username]</code>: Takes <code>username</code>\'s VIP status. Requires: & ~' +
 				'<br />' +
 				'<code>list</code>: Shows list of users with VIP Status.' +
+				'</div>'
+			);
+		},
+	},
+
+	partner: 'partnership',
+	partnership: {
+		give: function (target, room, user) {
+			if (!this.can('customtitle')) return false;
+			if (!target) return this.parse('/help', true);
+			let partUsername = toId(target);
+			if (partUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
+			if (isPart(partUsername)) return this.errorReply(`${target} is already a Partner.`);
+			Db.parts.set(partUsername, 1);
+			this.sendReply(`|html|${OCPU.nameColor(partUsername, true)} has been given Partnership status.`);
+			if (Users.get(partUsername)) Users(partUsername).popup(`|html|You have been given Partnership status by ${OCPU.nameColor(user.name, true)}.`);
+		},
+
+		take: function (target, room, user) {
+			if (!this.can('customtitle')) return false;
+			if (!target) return this.parse('/help', true);
+			let partUsername = toId(target);
+			if (partUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
+			if (!isPart(partUsername)) return this.errorReply(`${target} isn't a Partner user.`);
+			Db.parts.remove(partUsername);
+			this.sendReply(`|html|${OCPU.nameColor(partUsername, true)} has been demoted from Partnership status.`);
+			if (Users.get(partUsername)) Users(partUsername).popup(`|html|You have been demoted from Partnership status by ${OCPU.nameColor(user.name, true)}.`);
+		},
+
+		users: 'list',
+		list: function (target, room, user) {
+			if (!Db.vips.keys().length) return this.errorReply('There seems to be no user(s) with VIP status.');
+			let display = [];
+			Db.vips.keys().forEach(vipUser => {
+				display.push(OCPU.nameColor(vipUser, (Users(vipUser) && Users(vipUser).connected)));
+			});
+			this.popupReply(`|html|<strong><u><font size="3"><center>VIP Users:</center></font></u></strong>${display.join(',')}`);
+		},
+
+		'': 'help',
+		help: function (target, room, user) {
+			this.sendReplyBox(
+				'<div style="padding: 3px 5px;"><center>' +
+				'<code>/partnership</code> commands.<br />These commands are nestled under the namespace <code>partnership</code>.</center>' +
+				'<hr width="100%">' +
+				'<code>give [username]</code>: Gives <code>username</code> Partnership status. Requires: & ~' +
+				'<br />' +
+				'<code>take [username]</code>: Takes <code>username</code>\'s Partnership status. Requires: & ~' +
+				'<br />' +
+				'<code>list</code>: Shows list of users with Partnership Status.' +
 				'</div>'
 			);
 		},
@@ -601,7 +664,7 @@ exports.commands = {
 				profile += `${background(toId(username))} ${showBadges(toId(username))}`;
 				profile += `<div style="display: inline-block; width: 6.5em; height: 100%; vertical-align: top"><img src="${avatar}" height="80" width="80" align="left"></div>`;
 				profile += `<div style="display: inline-block">&nbsp;${pColor(toId(username))}<b>Name:</b></font> ${OCPU.nameColor(username, true)}&nbsp; ${getFlag(toId(username))} ${showTitle(username)}<br />`;
-				profile += `&nbsp;${pColor(toId(username))}<b>Group:</b> ${userGroup}</font> ${devCheck(username)} ${vipCheck(username)}<br />`;
+				profile += `&nbsp;${pColor(toId(username))}<b>Group:</b> ${userGroup}</font> ${devCheck(username)} ${vipCheck(username)} ${partCheck(username)}<br />`;
 				profile += `&nbsp;${pColor(toId(username))}<b>Registered:</b> ${regdate}</font><br />`;
 				profile += `&nbsp;${pColor(toId(username))}<b>${currencyPlural}:</b> ${currency}</font><br />`;
 				if (Db.pokemon.has(toId(username))) {
