@@ -12,7 +12,6 @@ exports.bindaddress = '0.0.0.0';
 exports.barredUsers = [];
 exports.barredIps = [];
 
-
 // gmcl - Automatically locks the globalmodchat commands.
 exports.gmcl = true;
 
@@ -256,7 +255,7 @@ exports.inactiveuserthreshold = 1000 * 60 * 60;
 // autolockdown - whether or not to automatically kill the server when it is
 // in lockdown mode and the final battle finishes.  This is potentially useful
 // to prevent forgetting to restart after a lockdown where battles are finished.
-exports.autolockdown = true;
+exports.autolockdown = false;
 
 // Custom avatars.
 // This allows you to specify custom avatar images for users on your server.
