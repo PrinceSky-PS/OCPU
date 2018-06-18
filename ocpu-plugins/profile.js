@@ -55,7 +55,7 @@ function vipCheck(user) {
 	if (isVIP(user)) return '<font color="#6390F0">(<strong>VIP User</strong>)</font>';
 	return '';
 }
-	
+
 function partCheck(user) {
 	if (isPart(user)) return '<font color="#009320">(<strong>Partner</dtrong>)</font>';
 	return '';
