@@ -11,4 +11,10 @@ exports.commands = {
 		}
 		require('child_process').exec('git pull', (error, stdout, stderr) => {connection.sendTo(room, ("" + stdout + stderr));});
 	},
+	stash: function (target, room, user, connection) {
+		if (!user.hasConsoleAccess(connection)) {
+			return this.errorReply("/stash - Access denied.");
+		}
+		require('child_process').exec('git stash', (error, stdout, stderr) => {connection.sendTo(room, ("" + stdout + stderr));});
+	},
 };
