@@ -213,7 +213,7 @@ exports.commands = {
 		list: function (target, room, user) {
 			if (!Db.parts.keys().length) return this.errorReply('There seems to be no user(s) with Partnership status.');
 			let display = [];
-			Db.parts.vips.keys().forEach(partUser => {
+			Db.parts.keys().forEach(partUser => {
 				display.push(OCPU.nameColor(partUser, (Users(partUser) && Users(partUser).connected)));
 			});
 			this.popupReply(`|html|<strong><u><font size="3"><center>Partner Users:</center></font></u></strong>${display.join(',')}`);
