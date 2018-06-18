@@ -211,12 +211,12 @@ exports.commands = {
 
 		users: 'list',
 		list: function (target, room, user) {
-			if (!Db.vips.keys().length) return this.errorReply('There seems to be no user(s) with VIP status.');
+			if (!Db.parts.keys().length) return this.errorReply('There seems to be no user(s) with Partnership status.');
 			let display = [];
-			Db.vips.keys().forEach(vipUser => {
-				display.push(OCPU.nameColor(vipUser, (Users(vipUser) && Users(vipUser).connected)));
+			Db.parts.vips.keys().forEach(partUser => {
+				display.push(OCPU.nameColor(partUser, (Users(partUser) && Users(partUser).connected)));
 			});
-			this.popupReply(`|html|<strong><u><font size="3"><center>VIP Users:</center></font></u></strong>${display.join(',')}`);
+			this.popupReply(`|html|<strong><u><font size="3"><center>Partner Users:</center></font></u></strong>${display.join(',')}`);
 		},
 
 		'': 'help',
