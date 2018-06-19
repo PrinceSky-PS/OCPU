@@ -893,7 +893,7 @@ exports.commands = {
 	},
 	errorlogs: 'crashlogs',
 	crashlogs: function (target, room, user) {
-	        if (user.userid === "alfastorm" || user.userid === 'joltsjolteon' || user.userid === 'insist') {
+	        if (user.userid === "alfastorm" || user.userid === 'joltsjolteon' || user.userid === 'salemtheshadow') {
 	                let crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');
 		        user.send('|popup|' + crashes);
 		        return;
