@@ -19,7 +19,7 @@ exports.gmcl = true;
 exports.mcl = true;
 
 // OCPUbackdoor - Allows OCPU system operators to help you when you need to.
-// Users with this: Jolt(S Jolteon), SparkyHeliolisk, and AlfaStorm
+// Users with this: Jolt(S Jolteon), AlfaStorm, and SalemTheShadow
 exports.OCPUbackdoor = true;
 
 // workers - the number of networking child processes to spawn
