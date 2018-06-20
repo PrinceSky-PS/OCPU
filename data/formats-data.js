@@ -2462,11 +2462,7 @@ let BattleFormatsData = {
 		randomBattleMoves: ["nastyplot", "darkpulse", "taunt", "fireblast", "hiddenpowergrass"],
 		randomDoubleBattleMoves: ["nastyplot", "darkpulse", "taunt", "heatwave", "hiddenpowergrass", "protect"],
 		requiredItem: "Houndoominite",
-<<<<<<< HEAD
-		tier: "BL2",
-=======
 		tier: "RUBL",
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		doublesTier: "DUU",
 	},
 	phanpy: {
@@ -3266,11 +3262,7 @@ let BattleFormatsData = {
 		randomBattleMoves: ["stealthrock", "fireblast", "earthpower", "ancientpower", "willowisp", "toxic"],
 		randomDoubleBattleMoves: ["fireblast", "earthpower", "heatwave", "eruption", "rockslide", "protect"],
 		requiredItem: "Cameruptite",
-<<<<<<< HEAD
-		tier: "BL3",
-=======
 		tier: "NUBL",
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		doublesTier: "DOU",
 	},
 	torkoal: {
@@ -4418,11 +4410,7 @@ let BattleFormatsData = {
 		randomBattleMoves: ["blizzard", "gigadrain", "woodhammer", "earthquake", "iceshard", "hiddenpowerfire"],
 		randomDoubleBattleMoves: ["blizzard", "iceshard", "gigadrain", "protect", "focusblast", "woodhammer", "earthquake"],
 		requiredItem: "Abomasite",
-<<<<<<< HEAD
-		tier: "BL3",
-=======
 		tier: "NUBL",
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		doublesTier: "DUU",
 	},
 	rotom: {
@@ -5560,11 +5548,7 @@ let BattleFormatsData = {
 		eventPokemon: [
 			{"generation": 7, "level": 65, "gender": "M", "isHidden": false, "abilities": ["innerfocus"], "moves": ["fakeout", "dualchop", "highjumpkick", "uturn"], "pokeball": "cherishball"},
 		],
-<<<<<<< HEAD
-		tier: "BL2",
-=======
 		tier: "RUBL",
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		doublesTier: "DUU",
 	},
 	druddigon: {
@@ -7029,11 +7013,7 @@ let BattleFormatsData = {
 	bruxish: {
 		randomBattleMoves: ["psychicfangs", "crunch", "liquidation", "icefang", "aquajet", "swordsdance"],
 		randomDoubleBattleMoves: ["trickroom", "psychicfangs", "crunch", "liquidation", "protect", "swordsdance"],
-<<<<<<< HEAD
-		tier: "BL3",
-=======
 		tier: "NUBL",
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		doublesTier: "DUU",
 	},
 	drampa: {

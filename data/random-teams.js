@@ -1563,7 +1563,6 @@ class RandomTeams extends Dex.ModdedDex {
 			// Custom level based on moveset
 			if (ability === 'Power Construct') level = 73;
 			if (item === 'Kommonium Z') level = 77;
-
 		} else {
 			// We choose level based on BST. Min level is 70, max level is 99. 600+ BST is 70, less than 300 is 99. Calculate with those values.
 			// Every 10.34 BST adds a level from 70 up to 99. Results are floored. Uses the Mega's stats if holding a Mega Stone
