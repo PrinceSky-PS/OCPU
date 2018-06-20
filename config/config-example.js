@@ -349,16 +349,19 @@ exports.github = {
 //     - forcewin: /forcewin command.
 //     - battlemessage: /a command.
 //     - tournaments: creating tournaments (/tour new, settype etc.)
-//     - tournamentsmoderation: /tour dq, autodq, end etc.
-//     - tournamentsmanagement: enable/disable tournaments.
+//     - gamemoderation: /tour dq, autodq, end etc.
+//     - gamemanagement: enable/disable games, minigames, and tournaments.
 //     - minigame: make minigames (hangman, polls, etc.).
 //     - game: make games.
+<<<<<<< HEAD
 //     - gamemanagement: enable/disable games and minigames.
 //   OCPU-specific permissions:
 //     - customtitle: Allows special profile management.
 //     - faction: Allows special management of all factions on this server
 //     - pban: Enables the usage of the perma-ban, perma-lock, and other commands like such
 
+=======
+>>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 exports.grouplist = [
 	{
 		symbol: '~',
@@ -387,7 +390,6 @@ exports.grouplist = [
 		potd: true,
 		disableladder: true,
 		globalonly: true,
-		tournamentsmanagement: true,
 		gamemanagement: true,
 		exportinputlog: true,
 		pban: true,
@@ -405,7 +407,6 @@ exports.grouplist = [
 		declare: true,
 		modchatall: true,
 		roomonly: true,
-		tournamentsmanagement: true,
 		gamemanagement: true,
 	},
 	{
@@ -441,13 +442,9 @@ exports.grouplist = [
 		name: "Host",
 		inherit: '@',
 		jurisdiction: 'u',
-		roommod: true,
-		roomdriver: true,
-		editroom: true,
 		declare: true,
 		modchat: true,
 		roomonly: true,
-		tournamentsmanagement: true,
 		gamemanagement: true,
 		joinbattle: true,
 	},
@@ -505,7 +502,7 @@ exports.grouplist = [
 		alts: '%u',
 		bypassblocks: 'u%@&~',
 		receiveauthmessages: true,
-		tournamentsmoderation: true,
+		gamemoderation: true,
 		jeopardy: true,
 		joinbattle: true,
 		minigame: true,
