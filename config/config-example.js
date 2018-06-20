@@ -353,15 +353,12 @@ exports.github = {
 //     - gamemanagement: enable/disable games, minigames, and tournaments.
 //     - minigame: make minigames (hangman, polls, etc.).
 //     - game: make games.
-<<<<<<< HEAD
 //     - gamemanagement: enable/disable games and minigames.
 //   OCPU-specific permissions:
 //     - customtitle: Allows special profile management.
 //     - faction: Allows special management of all factions on this server
 //     - pban: Enables the usage of the perma-ban, perma-lock, and other commands like such
 
-=======
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 exports.grouplist = [
 	{
 		symbol: '~',

@@ -1488,14 +1488,10 @@ const commands = {
 		let innerBuffer = [];
 		let group = Users.usergroups[targetId];
 		if (group) {
-<<<<<<< HEAD
 			buffer.push('Global auth: ' + group.charAt(0));
 			if (group === '&' || group === '~') {
-				buffer.push('This user is a part of Upper Staff. If they have no revelent room auth, they will have authority.');
+				buffer.push('This user is a part of Upper Staff. If they have no relevant room auth, they will have authority.');
 			}
-=======
-			buffer.push(`Global auth: ${group.charAt(0)}`);
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		}
 		Rooms.rooms.forEach((curRoom, id) => {
 			if (!curRoom.auth || curRoom.isPrivate) return;
@@ -3206,11 +3202,7 @@ const commands = {
 		}
 		if (Rooms.global.lockdown === true) {
 			Rooms.rooms.forEach((curRoom, id) => {
-<<<<<<< HEAD
-				if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-green\"><b>The server restart was cancelled.</b></div>").update();
-=======
 				if (id !== 'global') curRoom.addRaw(`<div class="broadcast-green"><b>The server restart was canceled.</b></div>`).update();
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 			});
 			for (const user of Users.users.values()) {
 				user.send(`|pm|~OCPU Server|${user.group}${user.name}|/raw <div class="broadcast-green"><b>The server restart has been cancelled.</b></div>`);
@@ -3236,12 +3228,8 @@ const commands = {
 			Config.pmmodchat = '%';
 		}
 		Rooms.rooms.forEach((curRoom, id) => {
-<<<<<<< HEAD
 			if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-red\">The server has entered emergency mode. Some features may be disabled or limited.</div>").update();
 			if (id !== 'global') curRoom.addRaw("<div class=\"broadcast-red\">PMs have been restricted to Global Staff only.").update();
-=======
-			if (id !== 'global') curRoom.addRaw(`<div class="broadcast-red">The server has entered emergency mode. Some features might be disabled or limited.</div>`).update();
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		});
 
 		const logRoom = Rooms('staff') || room;
@@ -3433,13 +3421,9 @@ const commands = {
 		}
 		if (!target) return this.parse('/help bash');
 
-<<<<<<< HEAD
 		if (target === `git pull` && cmd !== 'updateserver') connection.sendTo(room, "Please use '/updateserver' instead of this. This will still go through.");
 
 		connection.sendTo(room, "$ " + target);
-=======
-		connection.sendTo(room, `$ ${target}`);
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		require('child_process').exec(target, (error, stdout, stderr) => {
 			connection.sendTo(room, (`${stdout}${stderr}`));
 		});

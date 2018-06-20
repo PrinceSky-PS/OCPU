@@ -506,16 +506,11 @@ let Formats = [
 		],
 
 		mod: 'gen7',
-<<<<<<< HEAD
-		ruleset: ['[Gen 7] Ubers'],
-		banlist: ['Gengar-Mega', 'Rufflet', 'Arena Trap', 'Shadow Tag', 'Eevium Z', 'Eviolite', 'Deep Sea Tooth', 'Light Ball'],
-=======
 		ruleset: ['Pokemon', 'Standard', 'Team Preview'],
 		banlist: [
 			'Abra', 'Carvanha', 'Gastly', 'Gengar-Mega', 'Mawile-Mega', 'Medicham-Mega', 'Shedinja', 'Arena Trap', 'Huge Power',
 			'Shadow Tag', 'Deep Sea Scale', 'Deep Sea Tooth', 'Eevium Z', 'Eviolite', 'Light Ball', 'Thick Club', 'Baton Pass',
 		],
->>>>>>> 8d1c1dd0e2a9c3a1cd94e50498ecd32ba8f48439
 		onModifyTemplate: function (template, target, source) {
 			template = Object.assign({}, template);
 			template.baseStats = Object.assign({}, template.baseStats);
