@@ -371,7 +371,7 @@ exports.grouplist = [
 		symbol: '&',
 		id: "leader",
 		name: "Leader",
-		inherit: '^',
+		inherit: '\u005e',
 		jurisdiction: 'u',
 		promote: 'u',
 		roomowner: true,
@@ -407,7 +407,7 @@ exports.grouplist = [
 		gamemanagement: true,
 	},
 	{
-		symbol: '^',
+		symbol: '\u005e',
 		id: "captain",
 		name: "Captain",
 		inherit: '@',
