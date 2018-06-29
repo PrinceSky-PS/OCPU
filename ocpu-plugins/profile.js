@@ -668,7 +668,7 @@ exports.commands = {
 				profile += `&nbsp;${pColor(toId(username))}<b>Group:</b> ${userGroup}</font> ${devCheck(username)} ${vipCheck(username)} ${partCheck(username)}<br />`;
 				profile += `&nbsp;${pColor(toId(username))}<b>Registered:</b> ${regdate}</font><br />`;
 				profile += `&nbsp;${pColor(toId(username))}<b>${currencyPlural}:</b> ${currency}</font><br />`;
-				profile += '&nbsp;${pColor(toId(username))}<b>Level:</b> ${exp}</font><br />`;
+				profile += `&nbsp;${pColor(toId(username))}<b>Level:</b> ${exp}</font><br />`;
 				if (Db.pokemon.has(toId(username))) {
 					profile += `&nbsp;${pColor(toId(username))}<b>Favorite Pokemon:</b> ${Db.pokemon.get(toId(username))}</font><br />`;
 				}
