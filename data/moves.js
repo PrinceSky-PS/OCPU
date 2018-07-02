@@ -1039,6 +1039,11 @@ let BattleMovedex = {
 				}
 				return null;
 			},
+			onHit: function (target, source, move) {
+				if (move.zPowered && move.flags['contact']) {
+					source.trySetStatus('psn', target);
+				}
+			},
 		},
 		secondary: false,
 		target: "self",
@@ -2337,7 +2342,9 @@ let BattleMovedex = {
 			},
 		},
 		isZ: "kommoniumz",
-		secondary: false,
+		secondary: {
+			// Sheer Force negates the selfBoost even though it is not secondary
+		},
 		target: "allAdjacentFoes",
 		type: "Dragon",
 		contestType: "Cool",
@@ -8882,6 +8889,11 @@ let BattleMovedex = {
 				}
 				return null;
 			},
+			onHit: function (target, source, move) {
+				if (move.zPowered && move.flags['contact']) {
+					this.boost({atk: -2}, source, target, this.getMove("King's Shield"));
+				}
+			},
 		},
 		secondary: false,
 		target: "self",
@@ -11769,7 +11781,6 @@ let BattleMovedex = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
 		pseudoWeather: 'iondeluge',
-		isUnreleased: true,
 		secondary: false,
 		target: "normal",
 		type: "Electric",
@@ -15570,6 +15581,11 @@ let BattleMovedex = {
 					this.damage(source.maxhp / 8, source, target);
 				}
 				return null;
+			},
+			onHit: function (target, source, move) {
+				if (move.zPowered && move.flags['contact']) {
+					this.damage(source.maxhp / 8, source, target);
+				}
 			},
 		},
 		secondary: false,

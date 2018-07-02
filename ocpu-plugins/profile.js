@@ -613,6 +613,7 @@ exports.commands = {
 		let avatar = (targetUser ? (isNaN(targetUser.avatar) ? `http://${serverIp}:${Config.port}/avatars/${targetUser.avatar}` : `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar}.png`) : (Config.customavatars[userid] ? `http://${serverIp}:${Config.port}/avatars/${Config.customavatars[userid]}` : `http://play.pokemonshowdown.com/sprites/trainers/1.png`));
 		if (targetUser && targetUser.avatar[0] === '#') avatar = `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar.substr(1)}.png`;
 		let userSymbol = (Users.usergroups[userid] ? Users.usergroups[userid].substr(0, 1) : "Regular User");
+		let exp = OCPU.ExpControl.level(target);
 		let userGroup = (Config.groups[userSymbol] ? `Global ${Config.groups[userSymbol].name}` : `Regular User`);
 		let regdate = '(Unregistered)';
 		OCPU.regdate(userid, date => {
@@ -667,6 +668,7 @@ exports.commands = {
 				profile += `&nbsp;${pColor(toId(username))}<b>Group:</b> ${userGroup}</font> ${devCheck(username)} ${vipCheck(username)} ${partCheck(username)}<br />`;
 				profile += `&nbsp;${pColor(toId(username))}<b>Registered:</b> ${regdate}</font><br />`;
 				profile += `&nbsp;${pColor(toId(username))}<b>${currencyPlural}:</b> ${currency}</font><br />`;
+				profile += `&nbsp;${pColor(toId(username))}<b>Level:</b> ${exp}</font><br />`;
 				if (Db.pokemon.has(toId(username))) {
 					profile += `&nbsp;${pColor(toId(username))}<b>Favorite Pokemon:</b> ${Db.pokemon.get(toId(username))}</font><br />`;
 				}

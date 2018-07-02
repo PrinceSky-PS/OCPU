@@ -88,7 +88,7 @@ function writeFile(name, data) {
 logs = readFile(LOGS_FILE);
 if (!logs) logs = {leaderboard: {}, mvps: {}, hosts: {}, plays: {}, leavers: {}};
 /** @type {MafiaLogSection[]} */
-const tables = ['leaderboard', 'mvps', 'hosts', 'plays'];
+const tables = ['leaderboard', 'mvps', 'hosts', 'plays', 'leavers'];
 for (const section of tables) {
 	// Check to see if we need to eliminate an old month's data.
 	const month = new Date().toLocaleString("en-us", {month: "numeric", year: "numeric"});
@@ -1629,12 +1629,12 @@ const commands = {
 					skipped.push(toId(toHost));
 					toHost = hostQueue.shift();
 					if (!toHost) {
-						this.sendReply(`${skipped.join(', ')} were not online, not in the room, or are host banned and were removed from the host queue.`);
+						if (skipped.length) this.sendReply(`${skipped.join(', ')} were not online, not in the room, or are host banned and were removed from the host queue.`);
 						return this.errorReply(`Nobody on the host queue could be hosted.`);
 					}
 					this.splitTarget(toHost, false);
 				}
-				this.sendReply(`${skipped.join(', ')} were not online, not in the room, or are host banned and were removed from the host queue.`);
+				if (skipped.length) this.sendReply(`${skipped.join(', ')} were not online, not in the room, or are host banned and were removed from the host queue.`);
 			} else {
 				this.splitTarget(toHost, false);
 				if (!this.targetUser || !this.targetUser.connected) return this.errorReply(`The user "${this.targetUsername}" was not found.`);
@@ -2454,7 +2454,16 @@ const commands = {
 				buf += `<b>Description</b>: ${result.desc}<br/><details><summary class="button" style="font-weight: bold; display: inline-block">Setups:</summary>`;
 				for (let i in result) {
 					if (isNaN(parseInt(i))) continue;
-					buf += `${i}: ${result[i]}<br/>`;
+					buf += `${i}: `;
+					let count = {};
+					let roles = [];
+					for (const role of result[i].split(',').map((/** @type {string} */x) => x.trim())) {
+						count[role] = count[role] ? count[role] + 1 : 1;
+					}
+					for (const role in count) {
+						roles.push(count[role] > 1 ? `${count[role]}x ${role}` : role);
+					}
+					buf += `${roles.join(', ')}<br/>`;
 				}
 			} else {
 				buf += `${result.memo.join('<br/>')}`;
@@ -2514,12 +2523,12 @@ const commands = {
 				if (!logs.mvps[month][u]) logs.mvps[month][u] = 0;
 				if (cmd === 'unmvp') {
 					logs.mvps[month][u]--;
-					logs.leaderboard[month][u] -= 5;
+					logs.leaderboard[month][u] -= 10;
 					if (logs.mvps[month][u] === 0) delete logs.mvps[month][u];
 					if (logs.leaderboard[month][u] === 0) delete logs.leaderboard[month][u];
 				} else {
 					logs.mvps[month][u]++;
-					logs.leaderboard[month][u] += 5;
+					logs.leaderboard[month][u] += 10;
 				}
 			}
 			if (!gavePoints) return this.parse('/help mafia mvp');
@@ -2580,7 +2589,7 @@ const commands = {
 				if (queueIndex > -1) hostQueue.splice(queueIndex, 1);
 			}
 			writeFile(BANS_FILE, hostBans);
-			room.add(`${this.targetUsername} was ${isUnban ? 'un' : ''}banned from hosting games by ${user}${!isUnban ? ` for ${duration} days` : ''} by ${user.name}.`).update();
+			room.add(`${this.targetUsername} was ${isUnban ? 'un' : ''}banned from hosting games${!isUnban ? ` for ${duration} days` : ''} by ${user.name}.`).update();
 		},
 		hostbanhelp: [
 			`/mafia hostban [user], [duration] - Ban a user from hosting games for [duration] days. Requires % @ * # & ~`,
