@@ -98,8 +98,13 @@ exports.commands = {
 			if (!room.events[target]) return this.errorReply(`There is no such event named '${target}'. Check spelling?`);
 
 			if (!this.runBroadcast()) return;
+<<<<<<< HEAD
 			this.sendReplyBox(`<table border="1" cellspacing="0" cellpadding="3"><tr><td>${Chat.escapeHTML(room.events[target].eventName)}</td><td>${Chat.formatText(room.events[target].desc, true)}</td><td>${Chat.escapeHTML(room.events[target].date)}</td><td>${Chat.escapeHTML(room.events[target].creator)}</td></tr></table>`);
 			if (!this.broadcasting && user.can('declare', null, room)) this.sendReplyBox(Chat.html`<code>/roomevents add ${room.events[target].eventName} | ${room.events[target].date} | ${room.events[target].desc} | ${room.events[target].creator}</code>`);
+=======
+			this.sendReplyBox(`<table border="1" cellspacing="0" cellpadding="3"><tr><td>${Chat.escapeHTML(room.events[target].eventName)}</td><td>${Chat.formatText(room.events[target].desc, true)}</td><td><time>${Chat.escapeHTML(room.events[target].date)}</time></td></tr></table>`);
+			if (!this.broadcasting && user.can('ban', null, room)) this.sendReplyBox(Chat.html`<code>/roomevents add ${room.events[target].eventName} | ${room.events[target].date} | ${room.events[target].desc}</code>`);
+>>>>>>> 368a00f87ae8fbdd7dd73cb622ee1e0bb5fb4cc5
 		},
 		help: function (target, room, user) {
 			return this.parse('/help roomevents');
@@ -107,9 +112,14 @@ exports.commands = {
 	},
 	roomeventshelp: [
 		`/roomevents - Displays a list of upcoming room-specific events.`,
+<<<<<<< HEAD
 		`/roomevents add [event name] | [event date/time] | [event creator] | [event description] - Adds a room event. Requires: # & ~`,
 		`/roomevents edit [event name] | [event date/time] | [event creator] | [event description] - Edits the details of an event. Requires: # & ~`,
 		`/roomevents remove [event name] - Deletes an event. Requires: # & ~`,
+=======
+		`/roomevents add [event name] | [event date/time] | [event description] - Adds a room event. Requires: @ # & ~`,
+		`/roomevents remove [event name] - Deletes an event. Requires: @ # & ~`,
+>>>>>>> 368a00f87ae8fbdd7dd73cb622ee1e0bb5fb4cc5
 		`/roomevents view [event name] - Displays information about a specific event.`,
 	],
 };
