@@ -112,18 +112,7 @@ let Formats = [
 		banlist: ['OU', 'UUBL', 'Drizzle', 'Drought', 'Kommonium Z', 'Mewnium Z'],
 	},
 	{
-<<<<<<< HEAD
-		name: "[Gen 7] UU (suspect test)",
-		threads: [`&bullet; <a href="http://www.smogon.com/forums/threads/3636383/">UU Suspect Test</a>`],
 
-		mod: 'gen7',
-		challengeShow: false,
-		ruleset: ['[Gen 7] UU'],
-	},
-	{
-
-=======
->>>>>>> 368a00f87ae8fbdd7dd73cb622ee1e0bb5fb4cc5
 		name: "[Gen 7] RU",
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3625382/">RU Metagame Discussion</a>`,
@@ -693,34 +682,7 @@ let Formats = [
 		},
 	},
 	{
-<<<<<<< HEAD
-		name: "[Gen 7] STABmons",
-		desc: `Pok&eacute;mon can use any move of their typing, in addition to the moves they can normally learn.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3587949/">STABmons</a>`,
-		],
 
-		mod: 'gen7',
-		searchShow: false,
-		ruleset: ['[Gen 7] OU', 'STABmons Move Legality'],
-		banlist: ['Aerodactyl-Mega', 'Blacephalon', 'Kartana', 'Komala', 'Kyurem-Black', 'Porygon-Z', 'Silvally', 'Tapu Koko', 'Tapu Lele', 'King\'s Rock', 'Razor Fang'],
-		restrictedMoves: ['Acupressure', 'Belly Drum', 'Chatter', 'Extreme Speed', 'Geomancy', 'Lovely Kiss', 'Shell Smash', 'Shift Gear', 'Spore', 'Thousand Arrows'],
-	},
-	{
-		name: "[Gen 7] STABmons (suspect test)",
-		desc: `Pok&eacute;mon can use any move of their typing, in addition to the moves they can normally learn.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/posts/7761031/">STABmons Suspect Test</a>`,
-		],
-
-		mod: 'gen7',
-		ruleset: ['[Gen 7] OU', 'STABmons Move Legality'],
-		banlist: ['Aerodactyl-Mega', 'Blacephalon', 'Kartana', 'Komala', 'Kyurem-Black', 'Porygon-Z', 'Silvally', 'Tapu Koko', 'Tapu Lele', 'King\'s Rock', 'Razor Fang'],
-		restrictedMoves: ['Acupressure', 'Belly Drum', 'Chatter', 'Extreme Speed', 'Geomancy', 'Lovely Kiss', 'Shell Smash', 'Shift Gear', 'Spore', 'Thousand Arrows'],
-	},
-	{
-=======
->>>>>>> 368a00f87ae8fbdd7dd73cb622ee1e0bb5fb4cc5
 		name: "[Gen 7] 2v2 Doubles",
 		desc: `Double battle where you bring four Pok&eacute;mon to Team Preview and choose only two.`,
 		threads: [
