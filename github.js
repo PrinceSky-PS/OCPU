@@ -29,6 +29,9 @@ function sendMessages(str) {
 github.on('push', function push(repo, ref, result) {
 	let url = result.compare;
 	let branch = /[^/]+$/.exec(ref)[0];
+	if (branch !== 'master') {
+		return;
+	}
 	let messages = [];
 	let message = "";
 	message += "[<font color='FF00FF'>" + Chat.escapeHTML(repo) + '</font>] ';
