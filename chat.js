@@ -298,7 +298,7 @@ class CommandContext {
 					OCPU.ExpControl.addExp(this.user, this.room, 1);
 					expValue = 0;
 				}
-				expValue++
+				expValue++;
 			}
 		}
 
