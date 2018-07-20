@@ -8,14 +8,8 @@ Navigation: [Website][1] | [PS Server Repo][11] | [Client repository][2] | [Dex 
   [3]: https://github.com/Zarel/Pokemon-Showdown-Dex
   [11]: https://github.com/Zarel/Pokemon-Showdown
 
-<<<<<<< HEAD
 [![Dependency Status](https://david-dm.org/PSservers15/OCPU/status.svg)](https://david-dm.org/PSservers15/OCPU)
 [![devDependency Status](https://david-dm.org/PSservers15/OCPU/dev-status.svg)](https://david-dm.org/PSservers15/OCPU?type=dev)
-=======
-[![Build Status](https://api.travis-ci.com/Zarel/Pokemon-Showdown.svg)](https://travis-ci.com/Zarel/Pokemon-Showdown)
-[![Dependency Status](https://david-dm.org/zarel/Pokemon-Showdown.svg)](https://david-dm.org/zarel/Pokemon-Showdown)
-[![devDependency Status](https://david-dm.org/zarel/Pokemon-Showdown/dev-status.svg)](https://david-dm.org/zarel/Pokemon-Showdown?type=dev)
->>>>>>> fa7c216da5ad41f56c4067a4f8d8d760e3b12ad5
 
 Introduction
 ------------------------------------------------------------------------

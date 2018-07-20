@@ -984,12 +984,8 @@ class Tournament {
 
 		delete exports.tournaments[this.room.id];
 		delete this.room.game;
-<<<<<<< HEAD
 		for (let i in this.players) {
 			OCPU.ExpControl.addExp(this.players[i].userid, this.room, 5);
-=======
-		for (const i in this.players) {
->>>>>>> fa7c216da5ad41f56c4067a4f8d8d760e3b12ad5
 			this.players[i].destroy();
 		}
 	}
