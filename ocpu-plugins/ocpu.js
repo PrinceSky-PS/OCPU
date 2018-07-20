@@ -846,12 +846,10 @@ exports.commands = {
 		let popup = "|html|" + "<font size=5>OCPU Credits</font><br />" +
 		    "<u>Owners:</u><br />" +
 		    "- " + OCPU.nameColor('Jolt (S Jolteon)', true) + " (Founder, Sysop, Technical Admin, Development)<br />" +
-		    "- " + OCPU.nameColor('SparkyHeliolisk', true) + " (Sysop, Creative Admin, Policy Lead, Development)<br />" +
 		    "- " + OCPU.nameColor('AlfaStorm', true) + " (Sysop, Technical Admin, Development)<br />" +
 		    "<br />" +
 			 "<u>Contributors:</u><br />" +
 			 "- " + OCPU.nameColor('SalemTheShadow', true) + " (Technical Leader, Policy Lead, Development)<br />" +
-			 "- " + OCPU.nameColor('Glameowch', true) + " (Events Lead)<br />" +
 			 "<br />" +
 		    "<u>Development:</u><br />" +
 		    "- " + OCPU.nameColor('Insist', true) + " (Development, Fixed Eslint)<br />" +
