@@ -244,9 +244,9 @@ exports.commands = {
 		let targetId = toId(target);
 		if (Db.expoff.has(targetId)) return this.errorReply(`${target} is not currently exp banned.`);
 		Db.expoff.set(targetId, true);
-		this.globalModlog(`EXPUNBAN`, targetId, ` by ${user.name}`);
-		this.addModAction(`${target} was exp unbanned by ${user.name}.`);
-		this.sendReply(`${target} is no longer banned from exp.`);
+		this.globalModlog(`EXPBAN`, targetId, ` by ${user.name}`);
+		this.addModAction(`${target} was exp banned by ${user.name}.`);
+		this.sendReply(`${target} is now banned from exp.`);
 	},
 	expbanhelp: ['/expban target - bans a user from gaining exp until removed'],
 
