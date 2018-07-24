@@ -342,7 +342,7 @@ const commands = {
 	ipsearchhelp: [`/ipsearch [ip|range|host], (room) - Find all users with specified IP, IP range, or host. If a room is provided only users in the room will be shown. Requires: & ~`],
 
 	checkchallenges: function (target, room, user) {
-		if (!this.can('ban', null, room)) return false;
+		if (!this.can('warn', null, room)) return false;
 		if (!this.runBroadcast(true)) return;
 		if (!this.broadcasting) {
 			this.errorReply(`This command must be broadcast:`);
